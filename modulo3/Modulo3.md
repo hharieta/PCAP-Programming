@@ -412,3 +412,203 @@ Observa de nuevo como la sangría **mejora la legibilidad del código**.
 
 Esto puede sonar un poco desconcertante, pero ojalá que algunos ejemplos simples ayuden a comprenderlo mejor. 
 
+### Analizando ejemplos de código
+
+Ahora te mostraremos algunos programas simples pero completos. No los explicaremos en detalle, porque consideramos que los comentarios (y los nombres de las variables) dentro del código son guías suficientes.
+
+**Todos los programas resuelven el mismo problema: encuentran el número mayor y lo imprimen**.
+
+
+Ejemplo 1:
+
+Comenzaremos con el caso más simple: ¿Cómo identificar el mayor de los dos números? :
+
+```python
+#lee dos números
+numero1 = int (input("Ingresa el primer número:"))
+numero2 = int (input("Ingresa el segundo número:"))
+
+#elegir el número más grande
+if numero1> numero2:
+    nmasGrande = numero1
+else:
+    nmasGrande = numero2
+
+#imprimir el resultado
+print("El número más grande es:", nmasGrande)
+```
+
+****
+
+Ejemplo 2:
+
+Ahora vamos a mostrarte un hecho intrigante. Python tiene una característica interesante, mira el código a continuación:
+
+```python
+#lee dos números
+numero1 = int (input("Ingresa el primer número:"))
+numero2 = int (input("Ingresa el segundo número:"))
+
+#elegir el número más grande
+if numero1 > numero2: nmasGrande = numero1
+else: nmasGrande = numero2
+
+#imprimir el resultado
+print("El número más grande es: ", nmasGrande)
+```
+
+🗒️ **Nota**: si alguna de las ramas de `if-elif-else` contiene una sola instrucción, puedes codificarla de forma más completa (no es necesario que aparezca una línea con sangría después de la palabra clave), pero solo continúa la línea después de los dos puntos).
+
+Sin embargo, este estilo puede ser engañoso, y no lo vamos a usar en nuestros programas futuros, pero definitivamente vale la pena saber si quieres leer y entender los programas de otra persona.
+
+****
+
+Ejemplo 3
+
+*Encontremos el mayor de los tres números.*
+
+Suponemos que el primer valor es el más grande. Luego verificamos esta hipótesis con los dos valores restantes.
+
+Observa el siguiente código:
+
+```python
+#lee tres números
+numero1 = int (input("Ingresa el primer número:"))
+numero2 = int (input("Ingresa el segundo número:"))
+numero3 = int (input("Ingresa el tercer número:"))
+
+#asumimos temporalmente que el primer número
+#es el más grande
+#lo verificaremos pronto
+nmasGrande = numero1
+
+#comprobamos si el segundo número es más grande que el mayor número actual
+#y actualiza el número más grande si es necesario
+if numero2 > nmasGrande:
+    nmasGrande = numero2
+
+#comprobamos si el tercer número es más grande que el mayor número actual
+#y actualiza el número más grande si es necesario
+if numero3 > nmasGrande:
+    nmasGrande = numero3
+
+#imprimir el resultado
+print("El número más grande es:", nmasGrande)
+```
+
+
+Este método es significativamente más simple que tratar de encontrar el número más grande comparando todos los pares de números posibles (es decir, el primero con el segundo, el segundo con el tercero y el tercero con el primero). Intenta reconstruir el código por ti mismo.
+
+### Pseudocódigo e introducción a los ciclos o bucles
+
+Ahora deberías poder escribir un programa que encuentre el mayor de cuatro, cinco, seis o incluso diez números.
+
+Ya conoces el esquema, por lo que ampliar el tamaño del problema no será particularmente complejo.
+
+¿Pero qué sucede si te pedimos que escribas un programa que encuentre el mayor de doscientos números? ¿Te imaginas el código?
+
+Necesitarás doscientas variables. Si doscientas variables no son lo suficientemente complicadas, intenta imaginar la búsqueda del número más grande de un millón.
+
+Imagina un código que contiene 199 declaraciones condicionales y doscientas invocaciones de la función `input()`. Por suerte, no necesitas lidiar con eso. Hay un enfoque más simple.
+
+Por ahora ignoraremos los requisitos de la sintaxis de Python e intentaremos analizar el problema sin pensar en la programación real. En otras palabras, intentaremos escribir el **algoritmo**, y cuando estemos contentos con él, lo implementaremos.
+
+En este caso, utilizaremos un tipo de notación que no es un lenguaje de programación real (no se puede compilar ni ejecutar), pero está formalizado, es conciso y se puede leer. Se llama **pseudocódigo**.
+
+Veamos nuestro pseudocódigo a continuación:
+
+```pseint
+línea 01  numeroMayor = -999999999
+línea 02  numero = int(input())
+línea 03  if numero == -1:
+línea 04  print(numeroMayor)
+línea 05  exit()
+línea 06  if numero > numeroMayor:
+línea 07  numeroMayor = numero
+línea 08  vaya a la línea 02
+```
+
+Qué está pasando en él?
+
+* En primer lugar, podemos simplificar el programa si, al comienzo del código, asignamos la variable `numeroMayor` con un valor que será más pequeño que cualquiera de los números ingresados. Usaremos `-999999999` para ese propósito.
+* En segundo lugar, asumimos que nuestro algoritmo no sabrá por adelantado cuántos números se entregarán al programa. Esperamos que el usuario ingrese todos los números que desee; el algoritmo funcionará bien con cien y con mil números. ¿Cómo hacemos eso?
+* Hacemos un trato con el usuario: cuando se ingresa el valor `-1`, será una señal de que no hay más datos y que el programa debe finalizar su trabajo.
+* De lo contrario, si el valor ingresado no es igual a `-1`, el programa leerá otro número, y así sucesivamente.
+
+El truco se basa en la suposición de que cualquier parte del código se puede realizar más de una vez, precisamente, tantas veces como sea necesario.
+
+La ejecución de una determinada parte del código más de una vez se denomina bucle. El significado de este término es probablemente obvio para ti.
+
+Las líneas 02 a 08 forman un bucle. Los pasaremos tantas veces como sea necesario para revisar todos los valores ingresados.
+
+Python a menudo viene con muchas funciones integradas que harán el trabajo por ti. Por ejemplo, para encontrar el número más grande de todos, puede usar una función incorporada de Python llamada `max()`. Puedes usarlo con múltiples argumentos. Analiza el código de abajo:
+
+```python
+#lee tres números
+numero1 = int(input("Ingresa el primer número:"))
+numero2 = int(input("Ingresa el segundo número:"))
+numero3 = int(input("Ingresa el tercer número:"))
+
+#verifica cuál de los números es el mayor
+#y pásalo a la variable de mayor número
+
+numeroMayor = max(numero1,numero2,numero3)
+
+#imprimir el resultado
+print("El número más grande es:", numeroMayor)
+```
+
+De la misma manera, puedes usar la función `min()` para devolver el número más bajo. 
+
+Vamos a hablar sobre estas (y muchas otras) funciones pronto. Por el momento, nuestro enfoque se centrará en la ejecución condicional y los bucles para permitirte ganar más confianza en la programación y enseñarte las habilidades que te permitirán comprender y aplicar los dos conceptos en tu código. Entonces, por ahora, no estamos tomando atajos.
+
+**LABORATORIO**
+
+**Tiempo estimado**
+
+5-10 minutos
+
+**Nivel de dificultad**
+
+Fácil
+
+**Objetivos**
+
+* Familiarizarse con la función input().
+* Familiarizarse con los operadores de comparación en Python.
+* Familiarizarse con el concepto de ejecución condicional.
+
+**Escenario**
+
+Espatifilo, más comúnmente conocida como la planta de Cuna de Moisés o flor de la paz, es una de las plantas para interiores más populares que filtra las toxinas dañinas del aire. Algunas de las toxinas que neutraliza incluyen benceno, formaldehído y amoníaco.
+
+![espatifilo](assets/img8.jpeg)
+
+Imagina que tu programa de computadora ama estas plantas. Cada vez que recibe una entrada en forma de la palabra Espatifilo, grita involuntariamente a la consola la siguiente cadena:  *"¡Espatifilo es la mejor planta de todas!"* 
+
+
+Escribe un programa que utilice el concepto de ejecución condicional, tome una cadena como entrada y que:
+
+* Imprima el enunciado "Si, ¡El Espatifilo es la mejor planta de todos los tiempos!"  en la pantalla si la cadena ingresada es "Espatifilo".
+* Imprima "No, ¡quiero un gran Espatifilo!" si la cadena ingresada es "espatifilo".
+* Imprima  "¡Espatifilo! ¡No [entrada]!"  de lo contrario. Nota: [entrada] es la cadena que se toma como entrada.
+
+Prueba tu código con los datos que te proporcionamos. ¡Y hazte de un Espatifilo también!
+
+
+**Datos de prueba**
+
+Entrada de muestra: `espatifilo`
+
+Resultado esperado: `No, ¡quiero un gran Espatifilo!`
+
+Entrada de ejemplo: `pelargonio`
+
+Resultado esperado: `!Espatifilo! ¡No pelargonio!`
+
+Entrada de muestra: `Espatifilo`
+
+Resultado esperado: `Si, ¡El Espatifilo es la mejor planta de todos los tiempos!`
+
+
+
