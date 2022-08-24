@@ -743,5 +743,109 @@ Entrada de muestra: `1580`
 Resultado esperado: `No dentro del período del calendario gregoriano`
 
 
+⚜️ **PUNTOS CLAVE** ⚜️
+
+1. Los operadores de comparación (o también denominados relacionales) se utilizan para comparar valores. La siguiente tabla ilustra cómo funcionan los operadores de comparación, asumiendo que x=0, y=1 y z=0:
+
+![operadores de comparación](assets/img9.png)
+
+2. Cuando desea ejecutar algún código solo si se cumple una determinada condición, puede usar una declaración condicional:
+* una única declaración `if`, por ejemplo
+```python
+x = 10
+
+if x == 10: # condición
+    print("x es igual a 10") # ejecutado si la condición es verdadera
+```
+
+* Una serie de declaraciones `if`, por ejemplo:
+
+```python
+x = 10
+
+if x > 5: # condición uno
+    print("x es mayor que 5") # ejecutado si la condición uno es verdadera
+
+if x <10: # condición dos
+    print("x es menor que 10") # ejecutado si la condición dos es verdadera
+
+if x == 10: # condición tres
+     print("x es igual a 10") # ejecutado si la condición tres es verdadera
+```
+
+🗒️ **NOTA:** Cada declaración `if` se prueba por separado.
+
+* Una declaración de `if-else`, por ejemplo:
+
+```python
+x = 10
+
+if x < 10: # condición
+    print ("x es menor que 10") # ejecutado si la condición es Verdadera
+
+else:
+    print ("x es mayor o igual a 10") # ejecutado si la condición es False
+```
+
+
+* Una serie de declaraciones `if` seguidas de un `else`, por ejemplo:
+
+```python
+x = 10
+
+if x > 5: # Verdadero
+    print("x > 5")
+
+if x > 8: # Verdadero
+    print("x > 8")
+
+if x > 10: # Falso
+    print("x > 10")
+
+else:
+    print("Se ejecutará el else")
+```
+
+🗒️ **NOTA:** Cada `if` se prueba por separado. El cuerpo de `else` se ejecuta si el último `if` es False.
+
+* La declaración  `if-elif-else`, por ejemplo:
+
+ ```python
+x = 10
+
+if  x == 10: # Verdadero
+    print("x == 10")
+
+if x > 15: # Falso
+    print("x > 15")
+
+elif x > 10: # Falso
+    print("x > 10")
+
+elif x > 5: # Verdadero
+    print("x > 5")
+
+else:
+    print("No se ejecutará el else")
+```
+
+
+🗒️ **NOTA: ** Si la condición para `if` es False, el programa verifica las condiciones de los bloques `elif` posteriores: el primer `elif` que sea True es el que se ejecuta. Si todas las condiciones son False, se ejecutará el bloque `else`.
+
+* Declaraciones condicionales anidadas, ejemplo:
+
+```python
+x = 10
+
+if x > 5: # Verdadero
+    if x == 6: # Falso
+        print("anidado: x == 6")
+    elif x == 10: # Verdadero
+        print("anidado: x == 10")
+    else:
+        print("anidado: else")
+else:
+    print("else")
+```
 
 
