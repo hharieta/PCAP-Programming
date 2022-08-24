@@ -849,3 +849,417 @@ else:
 ```
 
 
+****
+
+## 3.1.2 Ciclos en Python
+
+### Ciclos o bucles en el código con while
+
+¿Estás de acuerdo con la declaración presentada a continuación?
+
+*mientras haya algo que hacer hazlo*
+
+Ten en cuenta que este registro también declara que, si no hay nada que hacer, nada ocurrirá.
+
+En general, en Python, un ciclo se puede representar de la siguiente manera:
+
+```python
+while expresión_condicional:
+    instrucción
+```
+
+Si observas algunas similitudes con la instrucción `if`, está bien. De hecho, la diferencia sintáctica es solo una: usa la palabra `while` en lugar de la palabra `if`.
+
+La **diferencia semántica** es más importante: cuando se cumple la condición, `if` realiza sus declaraciones sólo una vez; `while` repite la ejecución siempre que la condición se evalúe como True.
+
+🗒️ **Nota**: todas las reglas relacionadas con sangría también se aplican aquí. Te mostraremos esto pronto.
+
+Observa el algoritmo a continuación:
+
+```python
+while expresión_condicional:
+    instrucción_uno
+    instruccion_dos
+    instrucción_tres
+    :
+    :
+    instrucción_n
+```
+
+Ahora, es importante recordar que:
+
+* Si deseas ejecutar más de una declaración dentro de un `while`, debes (como con `if`) poner sangría a todas las instrucciones de la misma manera.
+* Una instrucción o conjunto de instrucciones ejecutadas dentro del `while` se llama el **cuerpo del ciclo**.
+* Si la condición es `False` (igual a cero) tan pronto como se compruebe por primera vez, el cuerpo no se ejecuta ni una sola vez (ten en cuenta la analogía de no tener que hacer nada si no hay nada que hacer).
+* El cuerpo debe poder cambiar el valor de la condición, porque si la condición es `True` al principio, el cuerpo podría funcionar continuamente hasta el infinito. Observa que hacer una cosa generalmente disminuye la cantidad de cosas por hacer.
+
+### Un bucle o ciclo infinito
+
+Un ciclo infinito, también denominado ciclo sin fin, es una **secuencia de instrucciones** en un programa que se repite indefinidamente (ciclo sin fin).
+
+Este es un ejemplo de un ciclo que no puede finalizar su ejecución:
+
+```python
+while True:
+    print("Estoy atrapado dentro de un ciclo")
+```
+
+Este ciclo imprimirá infinitamente *"Estoy atrapado dentro de un ciclo"*. En la pantalla.
+
+Analiza el programa cuidadosamente. Localiza el cuerpo del ciclo y descubre como se sale del cuerpo:
+
+```python
+#Almacenaremos el número más grande actual aquí
+numero Mayor = -999999999
+
+#Ingresa el primer valor
+numero = int(input ("Introduzca un número o escriba -1 para detener:"))
+
+#Si el número no es igual a -1, continuaremos
+ while numero != -1:
+    # ¿Es el número más grande que el número más grande?
+    if numero > numeroMayor:
+        # Sí si, actualiza el mayor númeroNúmero
+        numeroMayor = numero
+    # Ingresa el siguiente número
+    numero = int (input("Introduce un número o escribe -1 para detener:"))
+
+#Imprimir el número más grande
+print("El número más grande es:", numeroMayor)
+```
+
+Veamos otro ejemplo utilizando el ciclo `while`. Sigue los comentarios para descubrir la idea y la solución.
+
+```python
+# programa que lee una secuencia de números
+# y cuenta cuántos números son pares y cuántos son impares
+# programa termina cuando se ingresa cero
+
+numerosImpares = 0
+numerosPares = 0
+
+# lee el primer número
+numero = int (input ("Introduce un número o escriba 0 para detener:"))
+
+# 0 termina la ejecución
+while numero != 0:
+    # verificar si el número es impar
+    if numero % 2 == 1:
+        # aumentar el contador de números impares
+        numerosImpares += 1
+    else:
+        # aumentar el contador de números pares
+        numerosPares += 1
+    # lee el siguiente número
+    numero = int (input ("Introduce un número o escriba 0 para detener:"))
+
+# imprimir resultados
+print("Números impares: ", numerosImpares)
+print("Números pares: ", numerosPares)
+```
+
+
+
+Ciertas expresiones se pueden simplificar sin cambiar el comportamiento del programa.
+
+Intenta recordar cómo Python interpreta la verdad de una condición y ten en cuenta que estas dos formas son equivalentes:
+
+`while numero != 0:` y `while numero:`
+
+La condición que verifica si un número es impar también puede codificarse en estas formas equivalentes:
+
+`if numero % 2 == 1:` e `if numero % 2:`
+
+
+Observa el fragmento de código a continuación:
+
+```python
+contador = 5
+while contador != 0:
+    print("Dentro del ciclo: ", contador)
+    contador -= 1
+print("Fuera del ciclo", contador)
+```
+
+
+Este código está destinado a imprimir la cadena *"Dentro del ciclo"* y el valor almacenado en la variable contador durante un ciclo dado exactamente cinco veces. Una vez que la condición se haya cumplido (la variable contador ha alcanzado 0), se sale del ciclo y aparece el mensaje *"Fuera del ciclo"*. así como el valor almacenado en contador se imprime.
+
+**RECUERDA**❕️
+
+No te sientas obligado a codificar tus programas de una manera que siempre sea la más corta y la más compacta. La legibilidad puede ser un factor más importante. Manten tu código listo para un nuevo programador.
+
+**LABORATORIO** 🥽️🥼️
+
+**Tiempo estimado**
+
+15 minutos
+
+**Nivel de dificultad**
+
+Fácil
+
+**Objetivos**
+
+Familiarizar al estudiante con:
+
+* Utilizar el ciclo while.
+* Reflejar situaciones de la vida real en código de computadora.
+
+**Escenario**
+
+Un mago junior ha elegido un número secreto. Lo ha escondido en una variable llamada `númeroSecreto`. Quiere que todos los que ejecutan su programa jueguen el juego Adivina el número secreto, y adivina qué número ha elegido para ellos. ¡Quienes no adivinen el número quedarán atrapados en un ciclo sin fin para siempre! Desafortunadamente, él no sabe cómo completar el código.
+
+Tu tarea es ayudar al mago a completar el código en el editor de tal manera que el código:
+
+* Pedirá al usuario que ingrese un número entero.
+* Utilizará un ciclo `while`.
+* Comprobará si el número ingresado por el usuario es el mismo que el número escogido por el mago. Si el número elegido por el usuario es diferente al número secreto del mago, el usuario debería ver el mensaje *"¡Ja, ja! ¡Estás atrapado en mi ciclo!"*  y se le solicitará que ingrese un número nuevamente. Si el número ingresado por el usuario coincide con el número escogido por el mago, el número debe imprimirse en la pantalla, y el mago debe decir las siguientes palabras: *"¡Bien hecho, muggle! Eres libre ahora"*.
+¡El mago está contando contigo! No lo decepciones.
+
+
+**INFO EXTRA** 😶‍🌫️️
+
+Por cierto, mira la función `print()`. La forma en que lo hemos utilizado aquí se llama impresión **multilínea**. Puede utilizar comillas triples para imprimir cadenas en varias líneas para facilitar la lectura del texto o crear un diseño especial basado en texto. Experimenta con ello.
+
+```python
+numeroSecreto = 777
+
+print(
+"""
++==================================+
+| Bienvenido a mi juego, muggle!   |
+| Introduce un número entero       |
+| y adivina qué número he          |
+| elegido para ti.                 |
+| Entonces,                        |
+| ¿Cuál es el número secreto?      |
++==================================+
+""")
+```
+
+
+### Ciclos(bucles) en el código con for
+
+Otro tipo de ciclo disponible en Python proviene de la observación de que a veces es más importante contar los "giros o vueltas" del ciclo que verificar las condiciones.
+
+Imagina que el cuerpo de un ciclo debe ejecutarse exactamente cien veces. Si deseas utilizar el ciclo `while` para hacerlo, puede tener este aspecto:
+
+```python
+i = 0
+while i < 100:
+    # hacer_algo()
+    i += 1 
+```
+
+Sería bueno si alguien pudiera hacer esta cuenta aburrida por ti. ¿Es eso posible?
+
+Por supuesto que lo es, hay un ciclo especial para este tipo de tareas, y se llama `for`.
+
+En realidad, el ciclo `for` está diseñado para realizar tareas más complicadas, puede "explorar" grandes colecciones de datos elemento por elemento. Te mostraremos como hacerlo pronto, pero ahora presentaremos una variante más sencilla de su aplicación.
+
+Echa un vistazo al fragmento:
+
+ ```python
+for i in range (100):
+    #hacer algo()
+    pass
+```
+
+
+Hay algunos elementos nuevos. Déjanos contarte sobre ellos:
+
+* La palabra reservada `for` abre el ciclo `for`; nota - No hay condición después de eso; no tienes que pensar en las condiciones, ya que se verifican internamente, sin ninguna intervención.
+* Cualquier variable después de la palabra reservada `for` es la variable de control del ciclo; cuenta los giros del ciclo y lo hace automáticamente.
+* La palabra reservada `in` introduce un elemento de sintaxis que describe el rango de valores posibles que se asignan a la variable de control.
+* La función `range()` (esta es una función muy especial) es responsable de generar todos los valores deseados de la variable de control; en nuestro ejemplo, la función creará (incluso podemos decir que alimentará el ciclo con) valores subsiguientes del siguiente conjunto: 0, 1, 2 .. 97, 98, 99; nota: en este caso, la función `range()` comienza su trabajo desde 0 y lo finaliza un paso (un número entero) antes del valor de su argumento.
+* Nota la palabra clave `pass` dentro del cuerpo del ciclo - no hace nada en absoluto; es una instrucción vacía : la colocamos aquí porque la sintaxis del ciclo `for` exige al menos una instrucción dentro del cuerpo (por cierto, `if`, `elif`, `else` y `while` expresan lo mismo).
+
+Nuestros próximos ejemplos serán un poco más modestos en el número de repeticiones de ciclo.
+
+
+Echa un vistazo al fragmento de abajo. ¿Puedes predecir su salida?
+
+```python
+for i in range(10):
+    print("El valor de i es actualmente", i)
+```
+
+Ejecuta el código para verificar si tenías razón.
+
+🗒️ **Nota** :
+
+* El ciclo se ha ejecutado diez veces (es el argumento de la función `range()`).
+* El valor de la última variable de control es 9 (no 10, ya que comienza desde 0 , no desde 1).
+* La invocación de la función `range() puede estar equipada con dos argumentos, no solo uno:
+
+```python
+for i in range (2, 8):
+    print("El valor de i es actualmente", i)
+```
+
+En este caso, el primer argumento determina el **valor inicial** (primero) de la variable de control.
+
+El último argumento muestra el primer valor que no se asignará a la variable de control.
+
+🗒️ **Nota**: la función `range()` solo acepta enteros como argumentos y genera secuencias de enteros.
+
+¿Puedes adivinar la salida del programa? Ejecútalo para comprobar si ahora también estabas en lo cierto.
+
+* El primer valor mostrado es 2 (tomado del primer argumento de `range()`).
+* El último es 7 (aunque el segundo argumento de `range()` es 8).
+
+### Más sobre el ciclo for y la función range() con tres argumentos
+
+La función `range()` también puede aceptar tres argumentos: Echa un vistazo al código del editor.
+
+```python
+for i in range(2, 8, 3):
+    print("El valor de i es actualmente", i)
+```
+
+El tercer argumento es un incremento: es un valor agregado para controlar la variable en cada giro del ciclo (como puedes sospechar, el valor predeterminado del incremento es 1 ).
+
+¿Puedes decirnos cuántas líneas aparecerán en la consola y qué valores contendrán?
+
+Ejecuta el programa para averiguar si tenías razón.
+
+
+Deberías poder ver las siguientes líneas en la ventana de la consola:
+
+* El valor de i es actualmente 2
+* El valor de i es actualmente 5 
+
+⚠️ ¿Sabes por qué? El primer argumento pasado a la función `range()` nos dice cual es el número de inicio de la secuencia (por lo tanto, 2 en la salida). El segundo argumento le dice a la función dónde detener la secuencia (la función genera números hasta el número indicado por el segundo argumento, pero no lo incluye). Finalmente, el tercer argumento indica el paso, que en realidad significa la diferencia entre cada número en la secuencia de números generados por la función.
+
+`2`(número inicial) → `5` (2 incremento por `3` es igual a `5` - el número está dentro del rango de `2` a `8`) → `8` (`5` incremento por `3` es igual a `8` - el número no está dentro del rango de `2` a `8`, porque el parámetro de parada no está incluido en la secuencia de números generados por la función).
+
+🗒️ **Nota**: si el conjunto generado por la función `range()` está vacío, el ciclo no ejecutará su cuerpo en absoluto.
+
+Al igual que aquí, no habrá salida:
+
+```python
+for i in range(1, 1):
+    print("El valor de i es actualmente", i)
+```
+
+🗒️ **Nota**: el conjunto generado por `range()` debe ordenarse en un orden ascendente. No hay forma de forzar el `range()` para crear un conjunto en una forma diferente. Esto significa que el segundo argumento de `range()` debe ser mayor que el primero.
+
+Por lo tanto, tampoco habrá salida aquí:
+
+```python
+for i in range(2, 1):
+    print ("El valor de i es actualmente", i)
+``` 
+
+Echemos un vistazo a un programa corto cuya tarea es escribir algunas de las primeras potencias de dos:
+
+```python
+pow = 1
+for exp in range(16):
+    print ("2 a la potencia de", exp, "es", pow)
+    pow *= 2 
+
+```
+
+La variable `exp` se utiliza como una **variable de control** para el ciclo e indica el valor actual del exponente. La propia exponenciación se sustituye multiplicando por dos. Dado que 2⁰ es igual a 1, después 2 × 1 es igual a 2¹, 2 × 2¹ es igual a 2², y así sucesivamente. ¿Cuál es el máximo exponente para el cual nuestro programa aún imprime el resultado?
+Ejecuta el código y verifica si la salida coincide con tus expectativas.
+
+### Las declaraciones break y continue
+
+Hasta ahora, hemos tratado el cuerpo del ciclo como una secuencia indivisible e inseparable de instrucciones que se realizan completamente en cada giro del ciclo. Sin embargo, como desarrollador, podrías enfrentar las siguientes opciones:
+
+Parece que no es necesario continuar el ciclo en su totalidad; se debe abstener de seguir ejecutando el cuerpo del ciclo e ir más allá.
+Parece que necesitas comenzar el siguiente giro del ciclo sin completar la ejecución del turno actual.
+Python proporciona dos instrucciones especiales para la implementación de estas dos tareas. Digamos por razones de precisión que su existencia en el lenguaje no es necesaria: un programador experimentado puede codificar cualquier algoritmo sin estas instrucciones. Tales adiciones, que no mejoran el poder expresivo del lenguaje, sino que solo simplifican el trabajo del desarrollador, a veces se denominan dulces sintácticos o azúcar sintáctica.
+
+Estas dos instrucciones son:
+
+* Break: Sale del ciclo inmediatamente, e incondicionalmente termina la operación del ciclo; el programa comienza a ejecutar la instrucción más cercana después del cuerpo del ciclo.
+* Continue: Se comporta como si el programa hubiera llegado repentinamente al final del cuerpo; el siguiente turno se inicia y la expresión de condición se prueba de inmediato.
+
+**Ambas palabras son palabras clave reservadas**.
+
+Ahora te mostraremos dos ejemplos simples para ilustrar como funcionan las dos instrucciones. Mira el código en el editor. Ejecuta el programa y analiza la salida. Modifica el código y experimenta.
+
+```python
+# break - ejemplo
+
+print("La instrucción break:")
+for i in range(1,6):
+    if i == 3:
+        break
+    print("Dentro del ciclo.", i)
+print("Fuera del ciclo.")
+
+# continua - ejemplo
+
+print("\nLa instrucción continue:")
+for i in range(1,6):
+    if i == 3:
+        continue
+    print("Dentro del ciclo.", i)
+print("Fuera del ciclo.")
+
+>>> La instrucción break:
+Dentro del ciclo. 1
+Dentro del ciclo. 2
+Fuera del ciclo.
+
+La instrucción continue:
+Dentro del ciclo. 1
+Dentro del ciclo. 2
+Dentro del ciclo. 4
+Dentro del ciclo. 5
+Fuera del ciclo.
+```
+
+Regresemos a nuestro programa que reconoce el más grande entre los números ingresados. Lo convertiremos dos veces, usando las instrucciones de `break` y `continue`.
+
+Analiza el código y determina como usarías alguno de ellos.
+
+La variante `break` va aquí:
+
+```python
+numeroMayor = -99999999
+contador = 0
+
+while True:
+    numero = int (input ("Ingresa un número o escribe -1 para finalizar el programa:"))
+    if numero == -1:
+        break
+    contador = 1
+    if numero > numeroMayor:
+        numeroMayor = numero
+
+if contador != 0:
+    print("El número más grande es", numeroMayor)
+else:
+    print("No ha ingresado ningún número")
+```
+
+Ejecútalo, pruébalo y experimenta con él.
+
+Y ahora la variante `continue`:
+
+```python
+numeroMayor = -99999999
+contador = 0
+
+numero = int (input("Ingresa un número o escribe -1 para finalizar el programa:"))
+
+while numero != -1:
+    if numero == -1:
+        continue
+    contador = 1
+
+    if numero > numeroMayor:
+        numeroMayor = numero
+    numero = int (input ("Ingresa un número o escribe -1 para finalizar el programa:"))
+
+if contador:
+    print("El número más grande es", numeroMayor)
+else:
+    print("No ha ingresado ningún número")
+```
+
+Otra vez: ejecútalo, pruébalo y experimenta con él.
