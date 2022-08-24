@@ -1345,3 +1345,232 @@ Salida esperada:
 
 ```
 
+
+### El while y la opción else
+
+Ambos ciclos, `while` y `for`, tienen una característica interesante (y rara vez se usa).
+
+Te mostraremos cómo funciona: intenta juzgar por ti mismo si es utilizable.
+
+En otras palabras, trata de convencerte si la función es valiosa y útil, o solo es *azúcar sintáctica*.
+
+```python
+i = 1
+while i < 5:
+    print (i)
+    i += 1
+else:
+    print("else:", i)
+```
+
+Echa un vistazo al fragmento en el editor. Hay algo extraño al final: la palabra clave `else`.
+
+Como pudiste haber sospechado, los ciclos también pueden tener la rama `else`, como los `if`.
+
+La rama `else` del ciclo siempre se ejecuta una vez, independientemente de si el ciclo ha entrado o no en su cuerpo .
+
+¿Puedes adivinar la salida? Ejecuta el programa para comprobar si tenías razón.
+
+Modifica el fragmento un poco para que el ciclo no tenga oportunidad de ejecutar su cuerpo ni una sola vez:
+
+```python
+i = 5
+while i < 5:
+    print(i)
+    i += 1
+else:
+    print("else:", i)
+```
+
+El estado de `while` es Falso al principio, ¿puedes verlo?
+
+Ejecuta y prueba el programa, y verifica si se ha ejecutado o no la rama `else`.
+
+### El ciclo for y la rama else
+
+Los ciclos `for` se comportan de manera un poco diferente: echa un vistazo al fragmento en el editor y ejecútalo.
+
+```python
+for i in range(5):
+    print(i)
+else:
+    print("else:", i)
+```
+
+La salida puede ser un poco sorprendente.
+
+La variable `i` conserva su último valor.
+
+
+Modifica el código un poco para realizar un experimento más.
+
+```python
+i = 111
+for i in range(2, 1):
+    print(i)
+else:
+    print("else:", i)
+```
+
+¿Puedes adivinar la salida?
+
+El cuerpo del ciclo no se ejecutará aquí en absoluto. 🗒️ Nota: hemos asignado la variable `i`antes del ciclo.
+
+Ejecuta el programa y verifica su salida.
+
+***Cuando el cuerpo del ciclo no se ejecuta, la variable de control conserva el valor que tenía antes del ciclo.***
+
+🗒️ **Nota**: si la variable de control no existe antes de que comience el ciclo, no existirá cuando la ejecución llegue a la rama `else`.
+
+⚠️ Ahora vamos a informarte sobre otros tipos de variables. Nuestras variables actuales solo pueden almacenar un valor a la vez, pero hay variables que pueden hacer mucho más; pueden almacenar tantos valores como desees
+
+**LABORATORIO**
+
+**Tiempo estimado**
+
+20-30 minutos
+
+**Nivel de dificultad** 
+
+Medio
+
+**Objetivos** 
+
+Familiarizar al estudiante con:
+
+*Utilizar el ciclo while.
+* Encontrar la implementación adecuada de reglas definidas verbalmente.
+* Reflejar situaciones de la vida real en código de computadora.
+
+**Escenario**
+
+Escucha esta historia: Un niño y su padre, un programador de computadoras, juegan con bloques de madera. Están construyendo una pirámide.
+
+Su pirámide es un poco rara, ya que en realidad es una pared en forma de pirámide, es plana. La pirámide se apila de acuerdo con un principio simple: cada capa inferior contiene un bloque más que la capa superior.
+
+![piramide](assets/img10.jpg)
+
+Tu tarea es escribir un programa que lea la cantidad de bloques que tienen los constructores, y generar la altura de la pirámide que se puede construir utilizando estos bloques.
+
+Nota: La altura se mide por el número de capas completas: si los constructores no tienen la cantidad suficiente de bloques y no pueden completar la siguiente capa, terminan su trabajo inmediatamente.
+
+Prueba tu código con los datos que hemos proporcionado.
+
+```python
+bloques = int("Ingrese el número de bloques:"))
+
+#
+#Escribe tu código aquí.
+#
+print("La altura de la pirámide:", altura)
+```
+
+**Datos de prueba**
+
+Entrada de muestra: `6`
+
+Producto esperado: `La altura de la pirámide es: 3`
+
+Entrada de muestra: `20`
+
+Salida esperada: `La altura de la pirámide es: 5`
+
+Entrada de muestra: `1000`
+
+Resultado esperado: `La altura de la pirámide es: 44`
+
+Entrada de muestra: `2`
+
+Salida esperada: `La altura de la pirámide es: 1`
+
+⚜️ **PUNTOS CLAVE** ⚜️
+
+1. Hay dos tipos de ciclos en Python: while y for:
+
+* El ciclo `while` ejecuta una sentencia o un conjunto de declaraciones siempre que una condición booleana especificada sea verdadera, por ejemplo:
+
+```python
+#Ejemplo 1
+while True:
+    print("Atascado en un ciclo infinito")
+
+#Ejemplo 2
+contador = 5
+while contador > 2:
+    print(contador)
+    contador -= 1
+```
+
+* El ciclo `for` ejecuta un conjunto de sentencias muchas veces; se usa para iterar sobre una secuencia (por ejemplo, una lista, un diccionario, una tupla o un conjunto; pronto aprenderás sobre ellos) u otros objetos que son iterables (por ejemplo, cadenas). Puedes usar el ciclo for para iterar sobre una secuencia de números usando la función incorporada range. Mira los ejemplos a continuación:
+
+```python
+#Ejemplo 1
+palabra = "Python"
+for letter in palabra:
+    print(letter, fin = "*")
+
+#Ejemplo 2
+for i in range(1, 10):
+    if i % 2 == 0:
+        print(i)
+```
+
+2. Puedes usar las sentencias `break` y `continue` para cambiar el flujo de un ciclo:
+
+* Utiliza `break` para salir de un ciclo, por ejemplo:
+
+```python
+texto = "OpenEDG Python Institute"
+for letter in texto:
+    if letter == "P":
+        break
+    print(letter, end= "")
+```
+
+Utiliza `continue` para omitir la iteración actual, y continuar con la siguiente iteración, por ejemplo:
+
+```python
+text = "pyxpyxpyx"
+for letter in text:
+    if letter == "x":
+        continue
+    print(letter, end= "")
+```
+
+3. Los ciclos `while` y `for` también pueden tener una cláusula `else` en Python. La cláusula `else` se ejecuta después de que el ciclo finalice su ejecución siempre y cuando no haya terminado con `break`, por ejemplo:
+
+```python
+n = 0
+
+while n != 3:
+    print(n)
+    n += 1
+else:
+    print(n, "else")
+
+print()
+
+for i in range(0, 3):
+    print(i)
+else:
+    print(i, "else")
+```
+
+4. La función `range()` genera una secuencia de números. Acepta enteros y devuelve objetos de rango. La sintaxis de `range()` tiene el siguiente aspecto: `range(start, stop, step)`, donde:
+
+* start es un parámetro opcional que especifica el número de inicio de la secuencia (0 por defecto).
+* stop es un parámetro opcional que especifica el final de la secuencia generada (no está incluido).
+* step es un parámetro opcional que especifica la diferencia entre los números en la secuencia es (1 por defecto).
+
+Código de ejemplo:
+
+```python
+for i in range(3):
+    print(i, end=" ") # salidas: 0 1 2
+
+for i in range(6, 1, -2):
+    print(i, end=" ") # salidas: 6, 4, 2
+```
+
+
+
