@@ -303,7 +303,26 @@ Podemos decir, por ejemplo: *Si el clima es bueno, saldremos a caminar, de lo co
 
 Python nos permite expresar dichos planes alternativos. Esto se hace con una segunda forma, ligeramente mas compleja, de la declaración condicional, la declaración `if-else` :
 
-```python
+```pythonExpresiones lógicas
+Creemos una variable llamada var y asignémosle 1. Las siguientes condiciones son equivalentes a pares:
+
+print(var > 0)
+print(not (var <= 0))
+
+print(var != 0)
+print(not (var == 0))
+
+Puedes estar familiarizado con las leyes de De Morgan. Dicen que:
+
+La negación de una conjunción es la separación de las negaciones.
+
+La negación de una disyunción es la conjunción de las negaciones.
+
+
+Escribamos lo mismo usando Python:
+
+not (p and q) == (not p) or (not q) 
+not (p or q) == (not p) and (not q)
 if condición_true_or_false:
     ejecuta_si_condición_true
  else: 
@@ -1573,4 +1592,395 @@ for i in range(6, 1, -2):
 ```
 
 
+### Lógica de computadora
 
+¿Te has dado cuenta de que las condiciones que hemos usado hasta ahora han sido muy simples, por no decir, bastante primitivas? Las condiciones que utilizamos en la vida real son mucho más complejas. Veamos esta oración:
+
+*Si tenemos tiempo libre, y el clima es bueno, saldremos a caminar*.
+
+
+Hemos utilizado la conjunción `and (y)`, lo que significa que salir a caminar depende del cumplimiento simultáneo de estas dos condiciones. En el lenguaje de la lógica, tal conexión de condiciones se denomina **conjunción**. Y ahora otro ejemplo:
+
+*Si estás en el centro comercial o estoy en el centro comercial, uno de nosotros le comprará un regalo a mamá*.
+
+
+La aparición de la palabra `or (o)` significa que la compra depende de al menos una de estas condiciones. En lógica, este compuesto se llama una **disyunción**.
+
+Está claro que Python debe tener operadores para construir conjunciones y disyunciones. Sin ellos, el poder expresivo del lenguaje se debilitaría sustancialmente. Se llaman **operadores lógicos**.
+
+#### and
+Un operador de conjunción lógica en Python es la palabra `y`. Es un operador binario **con una prioridad inferior a la expresada por los operadores de comparación**. Nos permite codificar condiciones complejas sin el uso de paréntesis como este:
+
+```python
+contador > 0 and valor == 100
+```
+
+El resultado proporcionado por el operador `and` se puede determinar sobre la base de la **tabla de verdad**.
+
+Si consideramos la conjunción de `A and B`, el conjunto de valores posibles de argumentos y los valores correspondientes de conjunción se ve de la siguiente manera:
+
+![tabla verdad and](assets/img11.png)
+
+#### or
+
+Un operador de **disyunción** es la palabra `or`. Es un operador binario con una prioridad más baja que `and` (al igual que + en comparación con *). Su tabla de verdad es la siguiente:
+
+
+![tabla verdad or](assets/img12.png)
+
+#### not
+Además, hay otro operador que se puede aplicar para **condiciones de construcción**. Es un **operador unario** que realiza una *negación lógica*. Su funcionamiento es simple: convierte la verdad en falso y lo falso en verdad.
+
+Este operador se escribe como la palabra `not`, y su prioridad es muy alta: igual que el unario + y -. Su tabla de verdad es simple:
+
+![tabla verdad not](assets/img13.png)
+
+
+### Expresiones lógicas
+
+Creemos una variable llamada `var` y asignémosle 1. Las siguientes condiciones son **equivalentes** a pares:
+
+```python
+var = 1
+print(var > 0)
+print(not (var <= 0))
+
+>>> True
+    True
+```
+
+```python
+var = 1
+print(var != 0)
+print(not (var == 0))
+
+>>> True
+    True
+```
+
+
+Puedes estar familiarizado con las *leyes de De Morgan*. Dicen que:
+
+* La negación de una conjunción es la disyunción de las negaciones.
+* La negación de una disyunción es la conjunción de las negaciones.
+
+
+Escribamos lo mismo usando Python:
+
+```python
+#La negación de una conjunción es la disyunción de las negaciones
+not (p and q) == (not p) or (not q)
+
+#La negación de una disyunción es la conjunción de las negaciones
+not (p or q) == (not p) and (not q)
+```
+
+### Valores lógicos vs. bits individuales
+
+Los operadores lógicos toman sus argumentos como un todo, independientemente de cuántos bits contengan. Los operadores solo conocen el valor: cero (cuando todos los bits se restablecen) significa `False`; no cero (cuando se establece al menos un bit) significa `True`.
+
+El resultado de sus operaciones es uno de estos valores: `False` o `True`. Esto significa que este fragmento de código asignará el valor `True` a la variable `j` si `i` no es cero; de lo contrario, será `False`.
+
+```python
+i = 1
+j = not not i
+```
+
+### Operadores bitwise
+Sin embargo, hay cuatro operadores que le permiten **manipular bits de datos individuales**. Se denominan operadores **bitwise**.
+
+Cubren todas las operaciones que mencionamos anteriormente en el contexto lógico, y un operador adicional. Este es el operador xor (como en **o exclusivo**), y se denota como `^` (signo de intercalación).
+
+Aquí están todos ellos:
+
+* `&`  (ampersand) - conjunción a nivel de bits.
+* `|`  (barra vertical) - disyunción a nivel de bits.
+* `~`  (tilde) - negación a nivel de bits.
+* `^`  (signo de intercalación) - exclusivo a nivel de bits o (xor).
+
+![bitwise1](assets/img14.png)
+
+![bitwise2](assets/img15.png)
+
+‼️ **Agreguemos un comentario importante**: los argumentos de estos operadores deben ser ***enteros***. No debemos usar flotantes aquí.
+
+* La diferencia en el funcionamiento de los operadores *lógicos* y de *bits* es importante: ***los operadores lógicos no penetran en el nivel de bits de su argumento. Solo les interesa el valor entero final***.
+* Los operadores **bitwise** son más estrictos: ***tratan con cada bit por separado***. Si asumimos que la variable entera ocupa 64 bits (lo que es común en los sistemas informáticos modernos), puede imaginar la operación a nivel de bits como una evaluación de 64 veces del operador lógico para cada par de bits de los argumentos. Su analogía es obviamente imperfecta, ya que en el mundo real todas estas 64 operaciones se realizan al mismo tiempo (simultáneamente).
+
+Ahora te mostraremos un ejemplo de la diferencia en la operación entre las operaciones **lógicas** y de **bit**. Supongamos que se han realizado las siguientes tareas:
+
+```python
+i = 15
+j = 22 
+# Si asumimos que los enteros se almacenan con 32 bits,
+# la imagen a nivel de bits de las dos variables será la siguiente:
+
+i: 00000000000000000000000000001111
+j: 00000000000000000000000000010110 
+
+# Se ejecuta la asignación:
+
+ log = i and j 
+"""
+Estamos tratando con una conjunción lógica aquí. Vamos a trazar el curso de los cálculos. 
+Ambas variables i y j no son ceros, por lo que se considerará que representan a True. 
+Al consultar la tabla de verdad para el operador and, podemos ver que el resultado será True. 
+No se realizan otras operaciones.
+"""
+print(log)
+
+>>> True
+```
+
+**Ahora la operación a nivel de bits - aquí está**:
+
+```python
+bit = i & j
+```
+
+El operador `&` operará con **cada par de bits** correspondientes por separado, produciendo los **valores de los bits relevantes** del resultado. Por lo tanto, el resultado será el siguiente:
+
+![andbit](assets/img16.png)
+
+*Estos bits corresponden al valor entero de seis*
+
+***Veamos ahora los operadores de negación***. 
+
+Primero el lógico:
+
+```python
+i = 15
+logneg = not i 
+
+#La variable logneg se establecerá en False: no es necesario hacer nada más.
+
+print(logneg)
+
+>>> False
+```
+
+La negación a nivel de bits es así:
+
+```python
+bitneg = ~i 
+```
+
+Puede ser un poco sorprendente: el valor de la variable bitneg es -16. Esto puede parecer extraño, pero no lo es en absoluto. Si deseas obtener más información, debes consultar el sistema de números binarios y las reglas que rigen los números de complemento de dos.
+
+![bitneg](assets/img17.png)
+
+Cada uno de estos operadores de dos argumentos se puede utilizar en forma abreviada. Estos son los ejemplos de sus notaciones equivalentes:
+
+![opBitAbrev](assets/img18.png)
+
+### ¿Cómo tratamos los bits individuales?
+
+Ahora te mostraremos para que puedes usar los operadores de **bitwise**. Imagina que eres un desarrollador obligado a escribir una pieza importante de un sistema operativo. Se te ha dicho que puedes usar una variable asignada de la siguiente forma:
+
+```python
+flagRegister = 0x1234
+```
+
+La variable almacena la información sobre varios aspectos de la operación del sistema. **Cada bit de la variable almacena un valor de si/no**. También se te ha dicho que solo uno de estos bits es tuyo, el tercero (recuerda que los bits se numeran desde cero y el número de bits cero es el más bajo, mientras que el más alto es el número 31). Los bits restantes no pueden cambiar, porque están destinados a almacenar otros datos. Aquí está tu bit marcado con la letra `x`:
+
+```python
+flagRegister = 000000000000000000000000000000x000
+```
+
+Es posible que tengas que hacer frente a las siguientes tareas:
+
+1. **Comprobar el estado de tu bit**: deseas averiguar el valor de su bit; comparar la variable completa con cero no hará nada, porque los bits restantes pueden tener valores completamente impredecibles, pero puedes usar la siguiente propiedad de conjunción:
+
+```python
+x & 1 = x
+x & 0 = 0
+``` 
+
+Si aplicas la operación `&` a la variable `flagRegister` junto con la siguiente imagen de bits:
+
+`00000000000000000000000000001000` 
+
+(observa el 1 en la posición de tu bit) como resultado, obtendrás una de las siguientes cadenas de bits:
+
+* 00000000000000000000000000001000 si tu bit se estableció en 1
+* 00000000000000000000000000000000 si tu bit se reseteo a 0
+
+Dicha secuencia de ceros y unos, cuya tarea es tomar el valor o cambiar los bits seleccionados, se denomina **máscara de bits**.
+
+Construyamos una máscara de bits para detectar el estado de tus bits. Debería apuntar a el **tercer bit**. Ese bit tiene el peso de 2³=8. Se podría crear una máscara adecuada mediante la siguiente declaración:
+
+```python
+theMask = 8
+```
+
+También puedes hacer una secuencia de instrucciones dependiendo del estado de tu bit i, aquí está:
+
+```python
+if flagRegister & theMask:
+    # mi bit está listo
+else:
+    # mi bit se restablece
+```
+
+2. **Reinicia tu bit**: asigna un cero al bit, mientras que todos los otros bits deben permanecer sin cambios; usemos la misma propiedad de la conjunción que antes, pero usemos una máscara ligeramente diferente, exactamente como se muestra a continuación:
+
+`11111111111111111111111111110111`
+
+Tenga en cuenta que la máscara se creó como resultado de la negación de todos los bits de la variable theMask. Restablecer el bit es simple, y se ve así (elige el que más te guste):
+
+```python
+flagRegister = flagRegister & ~theMask
+
+flagregister &= ~theMask
+```
+
+
+3. **Establece tu bit** : asigna un 1 a tu bit, mientras que todos los bits restantes deben permanecer sin cambios; usa la siguiente propiedad de disyunción:
+
+```python
+x | 1 = 1
+x | 0 = x 
+```
+
+Ya estás listo para configurar su bit con una de las siguientes instrucciones:
+
+```python
+flagRegister = flagRegister | theMask
+
+flagRegister |= theMask 
+```
+
+
+4. **Niega tu bit**: reemplaza un 1 con un 0 y un 0 con un 1. Puedes utilizar una propiedad interesante del operador ~x:
+
+```python
+x ^ 1 = ~x
+x ^ 0 = x 
+```
+
+Niega tu bit con las siguientes instrucciones:
+
+```python
+flagRegister = flagRegister ^ theMask
+
+flagRegister ^= theMask
+```
+
+### Desplazamiento izquierdo binario y desplazamiento derecho binario
+
+Python ofrece otra operación relacionada con los bits individuales: **shifting**. Esto se aplica solo a los valores de número entero, y no debe usar flotantes como argumentos para ello.
+
+Ya aplicas esta operación muy a menudo y muy inconscientemente. ¿Cómo multiplicas cualquier número por diez? Echa un vistazo:
+
+```pseint
+12345 × 10 = 123450
+```
+
+Como puede ver, **multiplicar por diez es de hecho un desplazamiento** de todos los dígitos a la izquierda y llenar el vacío resultante con cero.
+
+¿División entre diez? Echa un vistazo:
+
+```pseint
+12340 ÷ 10 = 1234
+```
+
+Dividir entre diez no es más que desplazar los dígitos a la derecha.
+
+La computadora realiza el mismo tipo de operación, pero con una diferencia: como dos es la base para los números binarios (no 10), **desplazar un valor un bit a la izquierda corresponde a multiplicarlo por dos**; respectivamente, **desplazar un bit a la derecha es como dividir entre dos** (observe que se pierde el bit más a la derecha).
+
+Los **operadores de cambio** en Python son un par de **dígrafos**: `<<` y `>>`, sugiriendo claramente en qué dirección actuará el cambio.
+
+```python
+valor << bits
+valor >> bits
+```
+
+**El argumento izquierdo de estos operadores es un valor entero cuyos bits se desplazan. El argumento correcto determina el tamaño del turno**.
+
+Esto demuestra que esta operación ciertamente no es conmutativa.
+
+Echa un vistazo a los cambios en la ventana del editor.
+
+```python
+var = 17
+varRight = var >> 1
+varLeft = var << 2
+print(var, varLeft, varRight)
+```
+
+La invocación final de `print()` produce el siguiente resultado:
+
+`17 68 8` 
+
+🗒️ **Nota**:
+
+`17 // 2 → 8` (desplazarse hacia la derecha en un bit equivale a la división de enteros en dos)
+`17 * 4 → 68` (desplazarse hacia la izquierda dos bits es lo mismo que multiplicar números enteros por cuatro).
+
+Y aquí está la **tabla de prioridades** actualizada , que contiene todos los operadores presentados hasta ahora:
+
+![tablaPrioridades](assets/img19.png)
+
+⚜️ **PUNTOS CLAVE** ⚜️
+
+1. Python es compatible con los siguientes operadores lógicos:
+
+* `and` → si ambos operandos son verdaderos, la condición es verdadera, por ejemplo, `(True and True) = True`.
+* `or` → si alguno de los **operandos** es verdadero, la condición es verdadera, por ejemplo, `(True or False) = True`.
+* `not` → devuelve `False` si el resultado es verdadero y devuelve `True` si es falso, por ejemplo, `not True = False`.
+
+2. Puedes utilizar operadores bit a bit para manipular bits de datos individuales. Los siguientes datos de muestra:
+
+```python
+x = 15 # el cual es  0000 1111  en binario.
+y = 16 # el cual es  0001 0000  en binario.
+```
+
+Se utilizarán para ilustrar el significado de operadores bit a bit en Python. Analiza los ejemplos a continuación:
+
+* `&` hace un bit a bit `and` (y), por ejemplo, `x & y = 0`, el cual es `0000 0000` en binario.
+* `|` hace un bit a bit `or` (o), por ejemplo, `x | y = 31`, el cual es `0001 1111` en binario.
+* `˜` hace un bit a bit `not` (no), por ejemplo, `˜ x = 240`, el cual es `1111 0000` en binario.
+* `^` hace un bit a bit `xor`, por ejemplo, `x ^ y = 31`, el cual es `0001 1111` en binario.
+* `>>` hace un desplazamiento bit a bit a la derecha, por ejemplo, `y >> 1 = 8`, el cual es `0000 1000` en binario.
+* `<<` hace un desplazamiento bit a bit a la izquierda, por ejemplo, `y << 3 = 128`, el cual es `1000 0000` en binario.
+
+**Ejercicio 1**
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+x = 1
+y = 0
+
+z = ((x == y) and (x == y)) or not(x == y)    
+print(not(z))
+```
+
+respuesta:
+```python
+False
+```
+
+**Ejercicio 2**
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+x = 4
+y = 1
+
+a = x & y
+b = x | y
+c = ~ x
+d = x ^ 5
+e = x >> 2
+f = x << 2
+
+print(a, b, c, d, e, f)
+```
+
+Respuesta
+```python
+ 0 5 -5 1 1 16
+```
