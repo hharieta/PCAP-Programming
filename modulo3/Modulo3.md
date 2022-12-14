@@ -156,7 +156,7 @@ Si queremos saber si tenemos que usar un gorro o no, nos hacemos la siguiente pr
 
 ```python
 centigradosAfuera ≥ 0.0 # mayor o igual a
-``` 
+```
 
 ### Operadores de Comparación: Menor o igual que
 
@@ -846,7 +846,7 @@ elif x > 5: # Verdadero
 
 else:
     print("No se ejecutará el else")
-```
+ ```
 
 
 🗒️ **NOTA: ** Si la condición para `if` es False, el programa verifica las condiciones de los bloques `elif` posteriores: el primer `elif` que sea True es el que se ejecuta. Si todas las condiciones son False, se ejecutará el bloque `else`.
@@ -1082,7 +1082,7 @@ Echa un vistazo al fragmento:
 for i in range (100):
     #hacer algo()
     pass
-```
+ ```
 
 
 Hay algunos elementos nuevos. Déjanos contarte sobre ellos:
@@ -1168,7 +1168,7 @@ Por lo tanto, tampoco habrá salida aquí:
 ```python
 for i in range(2, 1):
     print ("El valor de i es actualmente", i)
-``` 
+```
 
 Echemos un vistazo a un programa corto cuya tarea es escribir algunas de las primeras potencias de dos:
 
@@ -1592,6 +1592,9 @@ for i in range(6, 1, -2):
 ```
 
 
+
+## 3.1.3 Operaciones lógicas y de bits en Python
+
 ### Lógica de computadora
 
 ¿Te has dado cuenta de que las condiciones que hemos usado hasta ahora han sido muy simples, por no decir, bastante primitivas? Las condiciones que utilizamos en la vida real son mucho más complejas. Veamos esta oración:
@@ -1794,7 +1797,7 @@ Es posible que tengas que hacer frente a las siguientes tareas:
 ```python
 x & 1 = x
 x & 0 = 0
-``` 
+```
 
 Si aplicas la operación `&` a la variable `flagRegister` junto con la siguiente imagen de bits:
 
@@ -1984,3 +1987,1513 @@ Respuesta
 ```python
  0 5 -5 1 1 16
 ```
+
+
+
+## 3.1.4 Listas
+
+**¿Por qué necesitamos listas?**
+
+Puede suceder que tengas que leer, almacenar, procesar y, finalmente, imprimir docenas, quizás cientos, tal vez incluso miles de números. ¿Entonces que? ¿Necesitas crear una variable separada para cada valor? ¿Tendrás que pasar largas horas escribiendo declaraciones como la que se muestra a continuación?
+
+```python
+var1 = int(input())
+var2 = int(input())
+var3 = int(input())
+var4 = int(input())
+var5 = int(input())
+var6 = int(input())
+...
+```
+
+![pus no](assets/img20.jpg)
+
+
+
+Vamos a crear una variable llamada `numeros`; se le asigna no solo un número, sino que se llena con una lista que consta de cinco valores (nota: la lista **comienza con un corchete abierto y termina con un corchete cerrado** ; el espacio entre los corchetes es llenado con cinco números separados por comas).
+
+```python
+numeros = [ 10, 5, 7, 2, 1] 
+```
+
+
+
+`numeros` es una **lista que consta de cinco valores, todos ellos números enteros** de longitud cinco dado que constan de cinco elementos
+
+* una lista puede tener **diferentes tipos de datos**: int, float, str, incluso otras listas
+*  una lista está **siempre numerados desde cero**
+* una lista **es una colección de elementos, pero cada elemento es un escalar**.
+
+
+
+### Listas de indexación 
+
+¿Cómo cambias el valor de un elemento seleccionado en una lista?
+
+Vamos a asignar un nuevo valor de `111` al **primer elemento** en la lista:
+
+```python
+numeros = [10, 5, 7, 2, 1]
+print("Contenido de la lista original:", numeros) # imprime el contenido de la lista original
+
+numeros[0] = 111 
+print("Nuevo contenido de la lista:", numeros) # contenido de la lista actual
+
+>>> Contenido de la lista original: [10, 5, 7, 2, 1]
+>>> Nuevo contenido de la lista: [111, 5, 7, 2, 1]
+```
+
+Y ahora queremos copiar el valor del **quinto elemento al segundo elemento**
+
+```python
+numeros = [10, 5, 7, 2, 1]
+print("Contenido de la lista original:", numeros) # imprimiendo contenido de la lista original.
+
+numeros[0] = 111
+print("\nPrevio contenido de la lista:", numeros) # imprimiendo contenido de la lista anterior.
+
+numeros[1] = numeros[4]  # copiando el valor del quinto elemento al segundo
+print("Nuevo contenido de la lista:", numeros) # imprimiendo el contenido de la lista actual.
+
+>>> Contenido de la lista original: [10, 5, 7, 2, 1]
+>>> Previo contenido de la lista: [111, 5, 7, 2, 1]
+>>> Nuevo contenido de la lista: [111, 1, 7, 2, 1]
+```
+
+
+
+El valor dentro de los corchetes que selecciona un elemento de la lista se llama un **índice**, mientras que la operación de seleccionar un elemento de la lista se conoce como **indexación**.
+
+
+
+### Accediendo al contenido de una lista
+
+Se puede acceder a cada uno de los elementos de la lista por separado. Por ejemplo, se puede imprimir:
+
+```python
+print(numeros[0]) # accediendo al primer elemento de la lista. 
+```
+
+Suponiendo que todas las operaciones anteriores se hayan completado con éxito, el fragmento enviará `111` a la consola.
+
+Como puedes ver en el editor, la lista también puede imprimirse como un todo, como aquí:
+
+```python
+print(numeros) # imprimiendo la lista completa.
+```
+
+Como probablemente hayas notado antes, Python decora la salida de una manera que sugiere que todos los valores presentados forman una lista. La salida del fragmento de ejemplo anterior se ve así:
+
+```python
+[111, 1, 7, 2, 1]
+```
+
+
+
+### La función `len()`
+
+La longitud **de una lista** puede variar durante la ejecución. Se pueden agregar nuevos elementos a la lista, mientras que otros pueden eliminarse de ella. Esto significa que la lista es una **entidad muy dinámica**.
+
+Si deseas verificar la longitud actual de la lista, puedes usar una función llamada `len()` (su nombre proviene de *length - longitud*).
+
+La función toma el nombre de la lista **como un argumento y devuelve el número de elementos almacenados actualmente** dentro de la lista (en otras palabras, la longitud de la lista).
+
+### Eliminando elementos de una lista
+
+Cualquier elemento de la lista puede ser **eliminado** en cualquier momento, esto se hace con una instrucción llamada `del` (eliminar). 
+
+:notebook:**Nota**:  `del` es una instrucción, no una función. :exclamation:
+
+Tienes que apuntar al elemento que quieres eliminar, desaparecerá de la lista y la longitud de la lista se reducirá en uno.
+
+Mira el fragmento de abajo. ¿Puedes adivinar qué salida producirá? Ejecuta el programa en el editor y comprueba.
+
+```python
+del numeros[1] 
+print(len(numeros)) 
+print(numeros) 
+
+>>> [111, 7, 2, 1]
+```
+
+
+
+:warning: **No puedes acceder a un elemento que no existe** , no puedes obtener su valor ni asignarle un valor. Ambas instrucciones causarán ahora errores de tiempo de ejecución :warning:
+
+```python
+print(numeros[4])
+numeros[4] = 1 
+
+>>> Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list assignment index out of range
+```
+
+
+
+### Los índices negativos son válidos 
+
+![es neta](assets/tulio.jpg)
+
+Puede parecer extraño, pero los índices negativos son válidos y pueden ser muy útiles.
+
+Un elemento con un índice igual a `-1` es **el último en la lista**.
+
+```python
+print(numeros[-1])
+```
+
+El código del ejemplo mostrará `1`. Ejecuta el programa y comprueba.
+
+
+
+Del mismo modo, el elemento con un índice igual a `-2` es **el anterior al último en la lista**.
+
+```python
+print(numeros[-2])
+```
+
+El fragmento de ejemplo mostrará `2`.
+
+El último elemento accesible en nuestra lista es `numeros[-4]` (el primero). ¡No intentes ir más lejos! :no_good:
+
+
+
+**LABORATORIO** 🥽️🥼️
+
+**Tiempo estimado**
+
+5 minutos
+
+**Nivel de dificultad**
+
+Muy fácil
+
+**Objetivos**
+
+Familiarizar al estudiante con:
+
+- Usar instrucciones básicas relacionadas con listas.
+- Crear y modificar listas.
+
+**Escenario**
+
+Había una vez un sombrero. El sombrero no contenía conejo, sino una lista de cinco números: `1`, `2`, `3`, `4` y `5`.
+
+![mago](assets/img21.gif)
+
+Tu tarea es:
+
+- Escribir una línea de código que solicite al usuario que reemplace el número central en la lista con un número entero ingresado por el usuario (paso 1).
+- Escribir una línea de código que elimine el último elemento de la lista (paso 2).
+- Escribir una línea de código que imprima la longitud de la lista existente (paso 3).
+
+¿Listo para este desafío?
+
+
+
+```python
+listaSombrero = [1, 2, 3, 4, 5] # Esta es una lista existente de números ocultos en el sombrero.
+
+# Paso 1: escribe una línea de código que solicite al usuario
+# para reemplazar el número de en medio con un número entero ingresado por el usuario.
+numero = int(input("ingresa un número: "))
+
+listaSombrero[len(listaSombrero) // 2] = numero
+
+# Paso 2: escribe aquí una línea de código que elimine el último elemento de la lista.
+del listaSombrero[-1]
+
+# Paso 3: escribe aquí una línea de código que imprima la longitud de la lista existente.
+print(len(listaSombrero))
+
+print(listaSombrero)
+```
+
+
+
+### Funciones vs Métodos
+
+* Función:  **no pertenece a ningún dato** obtiene datos, puede crear nuevos datos y (generalmente) produce un resultado
+
+* Método: 
+
+  1. **tipo específico de función** se comporta como una función y se parece a una función, pero difiere en la forma en que actúa y en su estilo de invocación
+
+  2. Un método hace todas las cosas de una función, pero también puede **cambiar el estado de una entidad seleccionada**.
+
+     
+
+:information_source: **Un método es propiedad de los datos para los que trabaja, mientras que una función es propiedad de todo el código**. :information_source:
+
+Esto también significa que invocar un método requiere alguna especificación de los datos a partir de los cuales se invoca el método.
+
+En general, una invocación de función típica puede tener este aspecto:
+
+```python
+resultado =  funcion(argumento)
+```
+
+La función toma un argumento, hace algo y devuelve un resultado.
+
+```python
+resultado =  data.method(arg)  
+```
+
+Nota: el nombre del método está precedido por el nombre de los datos que posee el método. A continuación, se agrega un **punto**, seguido del **nombre del método** y un par de **paréntesis que encierran los argumentos**.
+
+El método se comportará como una función, pero puede hacer algo más: puede **cambiar el estado interno de los datos** a partir de los cuales se ha invocado.
+
+### Agregar elementos a una lista
+
+#### append()
+
+Un nuevo elemento puede ser *añadido* al final de la lista existente:
+
+```python
+lista = [1, 2, 3, 4]
+valor = 5
+lista.append(valor)
+
+print(lista)
+
+>>> [1, 2, 3, 4, 5]
+```
+
+Dicha operación se realiza mediante un método llamado `append()`. Toma el valor de su argumento y lo coloca **al final de la lista** que posee el método.
+
+#### insert()
+
+El método `insert()` es un poco más inteligente: puede agregar un nuevo elemento **en cualquier lugar de la lista**, no solo al final.
+
+```python
+lista = [1, 2, 3, 4, 5]
+lista.insert(0,0)
+print(len(numeros))
+print(numeros)
+
+>>> 6
+[0, 1, 2, 3, 4, 5]
+```
+
+Toma dos argumentos:
+
+- El primero muestra la ubicación requerida del elemento a insertar. Nota: todos los elementos existentes que ocupan ubicaciones a la derecha del nuevo elemento (incluido el que está en la posición indicada) se desplazan a la derecha, para hacer espacio para el nuevo elemento.
+- El segundo es el elemento a insertar.
+
+### Agregando elementos a una lista: continuación
+
+Puedes **iniciar la vida de una lista creándola vacía** (esto se hace con un par de corchetes vacíos) y luego agregar nuevos elementos según sea necesario.
+
+Echa un vistazo al fragmento en el editor. Intenta adivinar su salida después de la ejecución del bucle `for`. Ejecuta el programa para comprobar si tenías razón.
+
+Será una secuencia de números enteros consecutivos del `1` hasta `5`.
+
+```text
+0 -> i+1
+
+0 -> 0+1 = 1
+0 -> 1+1 = 2,1
+0 -> 2+1 = 3,2,1
+0 -> 3+1 = 4,3,2,1
+0 -> 4+1 = 5,4,3,2,1
+```
+
+
+
+```python
+miLista = [] # creando una lista vacía
+
+for i in range(5):
+    miLista.insert(0, i + 1)
+
+print(miLista)
+
+>>> [5, 4, 3, 2, 1]
+```
+
+
+
+### Listas en acción
+
+![acción](assets/img22.gif)
+
+Dejemos de lado las listas por un breve momento y veamos un tema intrigante.
+
+Imagina que necesitas reorganizar los elementos de una lista, es decir, revertir el orden de los elementos: el primero y el quinto, así como el segundo y cuarto elementos serán intercambiados. El tercero permanecerá intacto.
+
+
+
+Pregunta: ¿Cómo se pueden intercambiar los valores de dos variables?
+
+Echa un vistazo al fragmento:
+
+```python
+variable1 = 1 
+variable2 = 2
+variable2 = variable1
+variable1 = variable2 
+```
+
+Si haces algo como esto, **perderás el valor previamente almacenado**en`variable2`. Cambiar el orden de las tareas no ayudará. Necesitas una tercera variable **que sirva como almacenamiento auxiliar**.
+
+Así es como puedes hacerlo:
+
+```python
+variable1 = 1 
+variable2 = 2
+auxiliar = variable1 
+variable1 = variable2 
+variable2 = auxiliar 
+```
+
+Python ofrece una forma más conveniente de hacer el intercambio, echa un vistazo:
+
+```python
+variable1 = 1 
+variable2 = 2
+variable1, variable2 = variable2, variable1 
+```
+
+Claro, efectivo y elegante, ¿no?
+
+Ahora puedes **intercambiar** fácilmente los elementos de la lista para **revertir su orden**:
+
+```python
+miLista = [10, 1, 8, 3, 5] 
+miLista [0], miLista [4] = miLista [4], miLista [0]
+miLista [1], miLista [3] = miLista [3], miLista [1] 
+print(miLista) 
+```
+
+Ejecuta el fragmento. Su salida debería verse así:
+
+```python
+[5, 3, 8, 1, 10]
+```
+
+Se ve bien con cinco elementos.
+
+
+
+¿Seguirá siendo aceptable con una lista que contenga 100 elementos? No, no lo hará.
+
+¿Puedes usar el bucle `for` para hacer lo mismo automáticamente, independientemente de la longitud de la lista? Si, si puedes.
+
+------
+
+Así es como lo hemos hecho:
+
+```python
+miLista = [10, 1, 8, 3, 5]
+longitud = len(miLista)  
+
+for i in range (longitud // 2):
+    miLista[i], miLista[longitud-i-1] = miLista[longitud-i-1], miLista[i]
+    
+print(miLista) 
+```
+
+:notebook: Nota:
+
+- Hemos asignado la variable `longitud` a la longitud de la lista actual (esto hace que nuestro código sea un poco más claro y más corto).
+- Hemos lanzado el ciclo `for` para que se ejecute a través de su cuerpo `longitud // 2` veces (esto funciona bien para listas con longitudes pares e impares, porque cuando la lista contiene un número impar de elementos, el del medio permanece intacto).
+- Hemos intercambiado el elemento i (desde el principio de la lista) por el que tiene un índice igual a `(longitud-i-1)` (desde el final de la lista); en nuestro ejemplo, for `i` igual a `0` la `(longitud-i-1)` da `4`; for `i` igual a `3`, da `3`: esto es exactamente lo que necesitábamos.
+
+Las listas son extremadamente útiles y las encontrarás muy a menudo.
+
+
+
+**LABORATORIO** 🥽️🥼️
+
+**Tiempo estimado**
+
+10-15 minutos
+
+**Nivel de dificultad**
+
+Fácil
+
+**Objetivos**
+
+Familiarizar al estudiante con:
+
+- Crear y modificar listas simples.
+- Utilizar métodos para modificar listas.
+
+**Escenario**
+
+Los Beatles fueron uno de los grupos de música más populares de la década de 1960 y la banda más vendida en la historia. Algunas personas los consideran el acto más influyente de la era del rock. De hecho, se incluyeron en la compilación de la revista *Time* de las 100 personas más influyentes del siglo XX.
+
+La banda sufrió muchos cambios de formación, que culminaron en 1962 con la formación de John Lennon, Paul McCartney, George Harrison y Richard Starkey (mejor conocido como Ringo Starr).
+
+
+
+Escribe un programa que refleje estos cambios y le permita practicar con el concepto de listas. Tu tarea es:
+
+- Paso 1: Crea una lista vacía llamada `beatles`.
+- Paso 2: Emplea el método `append()` para agregar los siguientes miembros de la banda a la lista: `John Lennon`, `Paul McCartney` y `George Harrison`.
+- Paso 3: Emplea el ciclo`for` y el `append()` para pedirle al usuario que agregue los siguientes miembros de la banda a la lista: `Stu Sutcliffe`, y `Pete Best`.
+- Paso 4: Usa la instrucción `del` para eliminar a `Stu Sutcliffe` y `Pete Best` de la lista.
+- Paso 5: Usa el método `insert()` para agregar a `Ringo Starr` al principio de la lista.
+
+Por cierto, ¿eres fan de los Beatles?
+
+
+
+### ⚜️ PUNTOS CLAVE ⚜️
+
+1. La lista **es un tipo de dato** en Python que se utiliza para **almacenar múltiples objetos**. Es una **colección ordenada y mutable** de elementos separados por comas entre corchetes, por ejemplo:
+
+   ```python
+   miLista = [1, None, True, "Soy una cadena", 256, 0
+   ```
+
+2. Las listas se pueden **indexar y actualizar** , por ejemplo:
+
+   ```python
+   miLista  = [1, 1, None, True, 'Soy una cadena', 256, 0] 
+   print(miLista[3]) # salida: soy una cadena 
+   print(miLista[-1]) # salida: 0 
+   miLista[1] = '?' 
+   print(miLista) # salida: [1, '?', True, 'Soy una cadena', 256, 0] 
+   miLista.insert(0, "first") 
+   miLista.append("last") 
+   print(miLista ) # salida: ['first', 1, '?', True, 'Soy una cadena', 256, 0, 'last'] 
+   ```
+
+3. Las listas pueden estar **anidadas**, por ejemplo:
+
+   ```python
+   python miLista = [1, 'a', ["lista", 64, [0, 1], False]]
+   ```
+
+4.  Los elementos de la lista y las listas se pueden **eliminar**, por ejemplo:
+
+   ```python
+   miLista = [1, 2, 3, 4] 
+   del miLista[2]
+   print(miLista) # salida: [1, 2, 4] 
+   del miLista  # borra toda la lista 
+   ```
+
+5. Las listas pueden ser **iteradas** mediante el uso del bucle `for`, por ejemplo:
+   ```python
+   miLista = ["blanco", "purpura", "azul", "amarillo", "verde"]
+   for color in miLista:
+       print(color)
+   ```
+
+6. La función `len()` se puede usar para **verificar la longitud de la lista**, por ejemplo:
+
+   ```python
+   miLista = ["blanco", "purpura", "azul", "amarillo", "verde"] 
+   print(len(miLista)) # la salidas es 5 
+   del miLista[2] 
+   print (len(miLista)) # la salidas es 4 
+   ```
+
+
+
+7. Una invocación típica de **función** tiene el siguiente aspecto: `resultado = funcion(argumento)`, mientras que una invocación típica de un **método** se ve así: `resultado = data.method(arg)`.
+
+
+
+## 3.1.5 Ordenando listas simples
+
+### Ordenamiento burbuja
+
+![burbuja](assets/img23.png)
+
+
+
+Se han inventado muchos algoritmos de clasificación, que difieren mucho en velocidad, así como en complejidad. Vamos a mostrar un algoritmo muy simple, fácil de entender, pero desafortunadamente, tampoco es muy eficiente. Se usa muy raramente, y ciertamente no para listas extensas.
+
+Digamos que una lista se puede ordenar de dos maneras:
+
+- Ascendente (o más precisamente, no descendente): si en cada par de elementos adyacentes, el primer elemento no es mayor que el segundo.
+- Descendente (o más precisamente, no ascendente): si en cada par de elementos adyacentes, el primer elemento no es menor que el segundo.
+
+En las siguientes secciones, ordenaremos la lista en orden ascendente, de modo que los números se ordenen de menor a mayor.
+
+![lista](assets/img24.png)
+
+
+
+Intentaremos utilizar el siguiente enfoque: tomaremos el primer y el segundo elemento y los compararemos; si determinamos que están en el orden incorrecto (es decir, el primero es mayor que el segundo), los intercambiaremos; Si su orden es válido, no haremos nada. Un vistazo a nuestra lista confirma lo último: los elementos 01 y 02 están en el orden correcto, así como `8<10`.
+
+Ahora observa el segundo y el tercer elemento. Están en las posiciones equivocadas. Tenemos que intercambiarlos:
+
+![lista_1](assets/img25.png)
+
+
+
+Vamos más allá y observemos los elementos tercero y cuarto. Una vez más, esto no es lo que se supone que es. Tenemos que intercambiarlos:
+
+![lista_2](assets/img26.png)
+
+Ahora comprobemos los elementos cuarto y quinto. Si, ellos también están en las posiciones equivocadas. Ocurre otro intercambio:
+
+![lista_3](assets/img27.png)
+
+Ahora, por un momento, intenta imaginar la lista de una manera ligeramente diferente, es decir, de esta manera:
+
+![lista_4](assets/img28.png)
+
+Observa - El `10` está en la parte superior. Podríamos decir que flotó desde el fondo hasta la superficie, al igual que las burbujas **en una copa de champán**. El método de clasificación deriva su nombre de la misma observación: se denomina **ordenamiento de burbuja**.
+
+Ahora comenzamos con el segundo paso a través de la lista. Miramos el primer y el segundo elemento, es necesario un intercambio:
+
+![lista_5](assets/img29.png)
+
+Tiempo para el segundo y tercer elemento: también tenemos que intercambiarlos:
+
+![lista_6](assets/img30.png)
+
+Ahora el tercer y cuarto elementos, y la segunda pasada, se completa, ya que `8` ya está en su lugar:
+
+![lista_6](assets/img31.png)
+
+Comenzamos el siguiente pase inmediatamente. Observe atentamente el primer y el segundo elemento: se necesita otro cambio:
+
+![lista_7](assets/img32.png)
+
+Ahora `6` necesita ir a su lugar. Cambiamos el segundo y el tercer elemento:
+
+![lista_8](assets/img33.png)
+
+La lista ya está ordenada. No tenemos nada más que hacer. Esto es exactamente lo que queremos.
+
+Como puedes ver, la esencia de este algoritmo es simple: **comparamos los elementos adyacentes y, al intercambiar algunos de ellos, logramos nuestro objetivo**
+
+
+
+### Ordenando una lista :white_check_mark:
+
+¿Cuántos pases necesitamos para ordenar la lista completa?
+
+Resolvamos este problema de la siguiente manera: **introducimos otra variable**, su tarea es observar si se ha realizado algún intercambio durante el pase o no. Si no hay intercambio, entonces la lista ya está ordenada, y no hay que hacer nada más. Creamos una variable llamada `swapped`, y le asignamos un valor de `False` para indicar que no hay intercambios. De lo contrario, se le asignará `True`.
+
+```python
+miLista = [8, 10, 6, 2, 4] # lista para ordenar
+
+for i in range(len(miLista) - 1): # necesitamos (5 - 1) comparaciones
+    if miLista[i] > miLista[i + 1]: # compara elementos adyacentes
+        miLista[i], miLista [i + 1] = miLista[i + 1], miLista[i] # si terminamos aquí significa que tenemos que intercambiar los elementos.
+
+```
+
+Deberías poder leer y comprender este programa sin ningún problema:
+
+```python
+miLista = [8, 10, 6, 2, 4] # lista para ordenar
+swapped = True # lo necesitamos verdadero (True) para ingresar al bucle while
+
+while swapped:
+    swapped = False # no hay swaps hasta ahora
+    for i in range(len(miLista) - 1):
+        if miLista[i] > miLista[i + 1]:
+            swapped= True # ocurrió el intercambio!
+            miLista[i], miLista[i + 1] = miLista[i + 1], miLista[i]
+
+print(miLista)
+```
+
+
+
+Python, sin embargo, tiene sus propios mecanismos de clasificación. Nadie necesita escribir sus propias clases, ya que hay un número suficiente de **herramientas listas para usar**.
+
+Te explicamos este sistema de clasificación porque es importante aprender como procesar los contenidos de una lista y mostrarte como puede funcionar la clasificación real.
+
+Si quieres que Python ordene tu lista, puedes hacerlo de la siguiente manera:
+
+```python
+miLista = [8, 10, 6, 2, 4]
+miLista.sort() 
+print(miLista) 
+```
+
+Es tan simple como eso.
+
+La salida del fragmento es la siguiente:
+
+```python
+[2, 4, 6, 8, 10] 
+```
+
+
+
+### ⚜️ PUNTOS CLAVE ⚜️
+
+1. Puedes usar el método `sort()` para ordenar los elementos de una lista, por ejemplo:
+
+   ```python
+   lst = [5, 3, 1, 2, 4]
+   print(lst) 
+   lst.sort()
+   print(lst) # salida: [1, 2, 3, 4, 5]
+   ```
+
+2. También hay un método de lista llamado `reverse()`, que puedes usar para invertir la lista, por ejemplo:
+
+   ```python
+   lst = [5, 3, 1, 2, 4] print(lst)     lst.reverse() print (lst) # salida: [4, 2, 1, 3, 5]
+   ```
+   
+
+
+
+**Ejercicio 1** :muscle:
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+lst = ["D", "F", "A", "Z"]
+lst.sort ()
+print(lst)
+```
+
+
+
+**Ejercicio 2** 🏋🏻
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+a = 3
+b = 1
+c = 2
+lst = [a, c, b]
+lst.sort() 
+print(lst)
+```
+
+
+
+**Ejercicio 3** :muscle:
+
+¿Cuál es la salida del siguiente fragmento de código?
+
+```python
+a = "A" 
+b = "B"
+c = "C"
+d = "" 
+lst = [a, b, c, d] 
+lst.reverse() 
+print(lst)
+```
+
+
+
+## 3.1.6 Operaciones con listas
+
+### :warning:  **La vida al interior de una lista** :warning:
+
+Ahora queremos mostrarte una característica importante y muy sorprendente de las listas, que las distingue de las variables ordinarias.
+
+Queremos que lo memorices, ya que puede afectar tus programas futuros y causar graves problemas si se olvida o se pasa por alto.
+
+Echa un vistazo al fragmento de código:
+
+```python
+lista1 = [1]
+lista2 = lista1
+lista1[0] = 2
+print(lista2)
+
+>>> [2]
+```
+
+El programa:
+
+- Crea una lista de un elemento llamada `lista1`.
+- La asigna a una nueva lista llamada `lista2`.
+- Cambia el único elemento de `lista1`.
+- Imprime la `lista2`.
+
+La parte sorprendente es el hecho de que el programa mostrará como resultado: `[2]`, no `[1]`, que parece ser la solución obvia.
+
+Las listas (y muchas otras entidades complejas de Python) se almacenan de diferentes maneras que las variables ordinarias (escalares).
+
+Se podría decir que:
+
+- El nombre de una variable ordinaria es el **nombre de su contenido**. :heavy_exclamation_mark:
+- El nombre de una lista es el nombre de una ubicación de memoria **donde se almacena la lista**. :flags:
+
+:eyes: La asignación: `lista2 = lista1`copia el nombre de la matriz, no su contenido. En efecto, los dos nombres (`lista1` y `lista2`) **identifican la misma ubicación en la memoria de la computadora**. Modificar uno de ellos afecta al otro, y viceversa.
+
+¿Cómo se soluciona esto? :question:
+
+### Rodajas poderosas
+
+Afortunadamente, la solución está al alcance de su mano: su nombre es **rodaja**.
+
+Una rodaja es un elemento de la sintaxis de Python que permite **hacer una copia nueva de una lista, o partes de una lista**.
+
+En realidad, copia el contenido de la lista, no el nombre de la lista. Esto es exactamente lo que necesitas. Echa un vistazo al fragmento de código a continuación:
+
+```python
+lista1 = [1]
+lista2 = lista1[:]
+lista1[0] = 2
+print(lista2)
+
+>>> [1]
+```
+
+Esta parte no visible del código descrito como `[:]` puede producir una lista completamente nueva.
+
+Una de las formas más generales de la rodaja es la siguiente:
+
+```python
+miLista[inicio:fin]
+```
+
+Como puedes ver, se asemeja a la indexación, pero los dos puntos en el interior hacen una gran diferencia.
+
+Una rodaja de este tipo **crea una nueva lista (de destino), tomando elementos de la lista de origen: los elementos de los índices desde el principio hasta el `fin-1`**.
+
+Nota: no hasta el `fin`, sino hasta `fin-1`. Un elemento con un índice igual a `fin` es el primer elemento el cual **no participa en la segmentación**.
+
+Es posible utilizar valores negativos tanto para el inicio como para el fin(al igual que en la indexación).
+
+Echa un vistazo al fragmento:
+
+```python
+miLista = [10, 8, 6, 4, 2]
+nuevaLista = miLista [1:3]
+print(nuevaLista)
+
+>>> [8, 6]
+```
+
+La lista `nuevaLista` contendrá `inicio-fin` (3-1=2) elementos, los que tienen índices iguales a `1` y `2` (pero no `3`)
+
+La salida del fragmento es: `[8, 6]`
+
+### Rodajas índices negativos
+
+Observa el fragmento de código a continuación:
+
+```python
+miLista[inicio:fin]
+```
+
+Para repetir:
+
+- `inicio` es el índice del primer elemento **incluido en la rodaja**.
+- `fin` es el índice del primer elemento **no incluido en la rodaja.**
+
+
+
+Así es como **los índices negativos** funcionan con la rodaja:
+
+```python
+miLista = [10, 8, 6, 4, 2] 
+nuevaLista = miLista [1:-1]
+print(nuevaLista)
+
+>>> [8, 6, 4]
+```
+
+El resultado del fragmento es: `[8, 6, 4]`.
+
+Si el`inicio` especifica un elemento que se encuentra más allá del descrito por `fin` (desde el punto de vista inicial de la lista), la rodaja estará **vacía**:
+
+```python
+miLista = [10, 8, 6, 4, 2] 
+nuevaLista = miLista [-1:1] 
+print(nuevaLista)
+
+>>> []
+```
+
+
+
+### Rodajas: continuación
+
+Si omites `inicio` en tu rodaja, se supone que deseas obtener un segmento que comienza en el elemento con índice `0`.
+
+En otras palabras, la rodaja sería de esta forma:
+
+```python
+miLista[:fin]
+```
+
+Es un equivalente más compacto:
+
+```python
+miLista[0:fin]
+```
+
+Observa el fragmento de código a continuación:
+
+```python
+miLista = [10, 8, 6, 4, 2]
+nuevaLista = miLista[:3] 
+print(nuevaLista)
+```
+
+Es por esto que su salida es: `[10, 8, 6]`.
+
+Del mismo modo, si omites el `fin` en tu rodaja, se supone que deseas que el segmento termine en el elemento con el índice `len(miLista)`.
+
+En otras palabras, la rodaja sería de esta forma:
+
+```python
+miLista[inicio:]
+```
+
+Es un equivalente más compacto:
+
+```python
+miLista[inicio:len(miLista)]
+```
+
+Observa el siguiente fragmento de código:
+
+```python
+miLista = [10, 8, 6, 4, 2]
+nuevaLista = miLista[3:] 
+print(nuevaLista)
+```
+
+Por lo tanto, la salida es: `[4, 2]`.
+
+La instrucción `del` descrita anteriormente puede **eliminar más de un elemento de la lista a la vez, también puede eliminar rodajas**:
+
+```python
+miLista = [10, 8, 6, 4, 2] del miLista[1:3]  print(miLista)
+```
+
+Nota: En este caso, la rodaja **¡no produce ninguna lista nueva!**
+
+La salida del fragmento es:`[10, 4, 2]`.
+
+También es posible eliminar **todos los elementos** a la vez:
+
+```python
+miLista = [10, 8, 6, 4, 2] del miLista[:]  print(miLista)
+```
+
+La lista se queda vacía y la salida es: `[]`.
+
+Al eliminar la rodaja del código, su significado cambia dramáticamente.
+
+Echa un vistazo:
+
+```python
+miLista = [10, 8, 6, 4, 2] del miLista  print(miLista)
+```
+
+La instrucción `del` **eliminará la lista, no su contenido**.
+
+La función `print()` de la última línea del código provocará un error de ejecución.
+
+
+
+### Operadores `in` y `not`
+
+Python ofrece dos operadores muy poderosos, capaces de **revisar la lista para verificar si un valor específico está almacenado dentro de la lista o no**.
+
+Estos operadores son:
+
+```python
+elem in miLista 
+elem not in miLista 
+```
+
+El primero de ellos (`in`) verifica si un elemento dado(su argumento izquierdo) está actualmente almacenado en algún lugar dentro de la lista(el argumento derecho) - el operador devuelve `True` en este caso.
+
+El segundo (`not in`) comprueba si un elemento dado (su argumento izquierdo) está ausente en una lista - el operador devuelve `True` en este caso.
+
+------
+
+Observa el código en el editor. El fragmento muestra ambos operadores en acción. ¿Puedes adivinar su salida? Ejecuta el programa para comprobar si tenías razón.
+
+```python
+miLista = [0, 3, 12, 8, 2]
+
+print(5 in miLista)
+print(5 not in miLista)
+print(12 in miLista)
+
+>>> False
+True
+True
+```
+
+
+
+### Listas - más detalles
+
+Ahora queremos mostrarte algunos programas simples que utilizan listas.
+
+El primero de ellos intenta encontrar el mayor valor en la lista. Mira el código:
+
+```python
+miLista = [17, 3, 11, 5, 1, 9, 7, 15, 13]
+mayor = miLista[0]
+
+for i in range(1, len(miLista)):
+   if miLista [i]> mayor:
+        mayor = miLista[i]
+
+print(mayor)
+```
+
+
+
+El concepto es bastante simple: asumimos temporalmente que el primer elemento es el más grande y comparamos la hipótesis con todos los elementos restantes de la lista.
+
+El código da como resultado el`17`(como se espera).
+
+------
+
+El código puede ser reescrito para hacer uso de la forma recién introducida del ciclo `for`:
+
+```python
+miLista = [17, 3, 11, 5, 1, 9, 7, 15, 13]
+mayor = miLista[0] 
+for i in miLista:    
+    if i > mayor:        
+        mayor = i 
+
+print(mayor)
+```
+
+El programa anterior realiza una comparación innecesaria, cuando el primer elemento se compara consigo mismo, pero esto no es un problema en absoluto.
+
+El código da como resultado el `17` también (nada inusual).
+
+------
+
+Si necesitas ahorrar energía de la computadora, puedes usar una rodaja:
+
+```python
+miLista = [17, 3, 11, 5, 1, 9, 7, 15, 13]
+mayor = miLista[0] 
+for i in miLista[1:]:   
+    if i > mayor:       
+        mayor = i 
+print(mayor)
+```
+
+
+
+### Listas - algunos programas simples
+
+Ahora encontremos la ubicación de un elemento dado dentro de una lista:
+
+```python
+miLista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Encontrar = 5
+Encontrado = False
+
+for i in range(len(miLista)):
+    Encontrado = miLista[i] == Encontrar
+    if Encontrado:
+        break
+
+if Encontrado:
+    print("Elemento encontrado en el índice", i)
+else:
+    print("ausente")
+```
+
+
+
+:notebook: Nota:
+
+- El valor buscado se almacena en la variable `Encontrar`.
+- El estado actual de la búsqueda se almacena en la variable `Encontrado` (`True`/`False`).
+- Cuando `Encontrado` se convierte en `True`, se sale del bucle `for`.
+
+---
+
+Supongamos que has elegido los siguientes números en la lotería: `3`, `7`, `11`, `42`, `34`, `49`.
+
+Los números que han salido sorteados son: `5`, `11`, `9`, `42`, `3`, `49`.
+
+La pregunta es: ¿A cuántos números le has atinado?
+
+ ```python
+ sorteados = [5, 11, 9, 42, 3, 49]
+ seleccionados = [3, 7, 11, 42, 34, 49]
+ aciertos = 0
+ 
+ for numeros in seleccionados:
+     if numeros in sorteados:
+         aciertos += 1
+ 
+ print(aciertos)
+ ```
+
+:notebook: Nota:
+
+- La lista `sorteados` almacena todos los números ganadores.
+- La lista de `seleccionados` almacena con números con que se juega.
+- La variable `aciertos` cuenta tus aciertos.
+
+La salida del programa es: `4`.
+
+### LABORATORIO
+
+**Tiempo estimado**
+
+10-15 minutos
+
+**Nivel de dificultad**
+
+Fácil
+
+**Objetivos**
+
+Familiarizar al estudiante con:
+
+- Indexación de listas.
+- Utilizar operadores`in` y `not in`.
+
+**Escenario**
+
+Imagina una lista: no muy larga ni muy complicada, solo una lista simple que contiene algunos números enteros. Algunos de estos números pueden estar repetidos, y esta es la clave. No queremos ninguna repetición. Queremos que sean eliminados.
+
+Tu tarea es escribir un programa que elimine todas las repeticiones de números de la lista. El objetivo es tener una lista en la que todos los números aparezcan no más de una vez.
+
+Nota: Asume que la lista original está ya dentro del código, no tienes que ingresarla desde el teclado. Por supuesto, puedes mejorar el código y agregar una parte que pueda llevar a cabo una conversación con el usuario y obtener todos los datos.
+
+Sugerencia: Te recomendamos que crees una nueva lista como área de trabajo temporal, no necesitas actualizar la lista actual.
+
+```python
+miLista = [1, 2, 4, 4, 1, 4, 2, 6, 2, 9]
+#
+# coloca tu código aquí
+#
+
+lista = miLista[:]
+unique = []
+
+for num in lista[0:]:
+    if num not in unique:
+        unique.append(num)
+
+print("La lista solo con elementos únicos:")
+print(unique)
+```
+
+
+
+### ⚜️ PUNTOS CLAVE ⚜️
+
+1. Si tienes una lista `l1`, la siguiente asignación: `l2 = l1` no hace una copia de la lista `l1`, pero hace que las variables `l1` y `l2` **apunten a la misma lista en la memoria** . Por ejemplo:
+
+   ```python
+   vehiculosUno = ['carro', 'bicicleta', 'moto']
+   print(vehiculosUno) # salida: ['carro', 'bicicleta', 'moto']
+   
+   vehiculosDos = vehiculosUno
+   del vehiculosUno[0] # borra 'carro'
+   print(vehiculosDos) # salida: ['bicicleta', 'moto']
+   ```
+
+   
+
+2. Si deseas copiar una lista o parte de la lista, puede hacerlo haciendo uso de **rodajas(slicing)**:
+
+   ```python
+   colores = ['rojo', 'verde', 'naranja']
+   
+   copiaTodosColores = colores[:] # copia la lista completa
+   copiaParteColores = colores[0:2] # copia parte de la lista
+   ```
+
+3. También puede utilizar **índices negativos** para hacer uso de rodajas. Por ejemplo:
+
+   ```python
+   listaMuestra = ["A", "B", "C", "D", "E"]
+   nuevaLista = listaMuestra[2:-1]
+   print(nuevaLista) # salida: ['C', 'D']
+   ```
+
+4. Los parámetros `inicio` y `fin`son **opcionales** al partir en rodajas una lista: `lista[inicio:fin]`, por ejemplo:
+
+   ```python
+   miLista = [1, 2, 3, 4, 5]
+   rodajaUno = miLista [2:]
+   rodajaDos = miLista [:2]
+   rodajaTres = miLista [-2:]
+   
+   print(rodajaUno) # salidas: [3, 4, 5]
+   print(rodajaDos) # salidas: [1, 2]
+   print(rodajaTres) # salidas: [4, 5]
+   ```
+
+5. Puedes **eliminar rodajas** utilizando la instrucción `del`:
+
+   ```python
+   miLista = [1, 2, 3, 4, 5]
+   del miLista [0:2]
+   print(miLista) # salida: [3, 4, 5]
+   
+   del miLista[:]
+   print(miLista) # elimina el contenido de la lista, genera: []
+   ```
+
+   
+
+6. Puedes probar si algunos elementos **existen en una lista o no** utilizando las palabras clave `in` y `not in`, por ejemplo:
+
+   ```python
+   miLista = ["A", "B", 1, 2]
+   
+   print("A" in miLista) # salida: True
+   print("C" not in miLista) # salida: False
+   print(2 not in miLista) # salidas: False
+   ```
+
+   
+
+
+
+## 3.1.7 Listas en aplicaciones Avanzadas
+
+![hack](assets/img34.png)
+
+### Listas dentro de listas
+
+Las listas pueden constar de escalares (es decir, números) y elementos de una estructura mucho más compleja (ya has visto ejemplos como cadenas, booleanos o incluso otras listas en las lecciones del Resumen de la Sección anterior). Veamos más de cerca el caso en el que los elementos de una lista **son solo listas**.
+
+A menudo encontramos estos **arreglos** en nuestras vidas. Probablemente el mejor ejemplo de esto sea un **tablero de ajedrez**.
+
+![tablero](assets/img35.jpg)
+
+Un tablero de ajedrez está compuesto de filas y columnas. Hay ocho filas y ocho columnas. Cada columna está marcada con las letras de la A a la H. Cada línea está marcada con un número del uno al ocho.
+
+La ubicación de cada campo se identifica por pares de letras y dígitos. Por lo tanto, sabemos que la esquina inferior derecha del tablero (la que tiene la torre blanca) es A1, mientras que la esquina opuesta es H8.
+
+Supongamos que podemos usar los números seleccionados para representar cualquier pieza de ajedrez. También podemos asumir que **cada fila en el tablero de ajedrez es una lista**.
+
+```python
+fila = []
+
+for i in range(8):
+    row.append(PEON_BLANCO)
+```
+
+Crea una lista que contiene ocho elementos que representan la segunda fila del tablero de ajedrez: la que está llena de peones (supón que `PEON_BLANCO` es un **símbolo predefinido** que representa un peón blanco).
+
+El mismo efecto se puede lograr mediante una **comprensión de lista**, la sintaxis especial utilizada por Python para completar o llenar listas masivas.
+
+Una comprensión de lista es en realidad una lista, pero **se creó sobre la marcha durante la ejecución del programa, y no se describe de forma estática**.
+
+Echa un vistazo al fragmento:
+
+```python
+fila = [PEON_BLANCO for i in range(8)]
+```
+
+La parte del código colocada dentro de los paréntesis especifica:
+
+- Los datos que se utilizarán para completar la lista (`PEON_BLANCO`)
+- La cláusula que especifica cuántas veces se producen los datos dentro de la lista (`for i in range(8)`)
+
+---
+
+Permítenos mostrarte otros **ejemplos de comprensión de lista**:
+
+**Ejemplo 1**:
+
+```python
+cuadrados = [x ** 2 for x in range(10)]
+```
+
+El fragmento de código genera una lista de diez elementos y rellena con cuadrados de diez números enteros que comienzan desde cero (0, 1, 4, 9, 16, 25, 36, 49, 64, 81)
+
+**Ejemplo 2**:
+
+```python
+dos = [2 ** i for i in range(8)]
+```
+
+El fragmento crea un arreglo de ocho elementos que contiene las primeras ocho potencias del numero dos (1, 2, 4, 8, 16, 32, 64, 128)
+
+**Ejemplo 3**:
+
+```python
+probabilidades = [x for x in cuadrados if x % 2 != 0] 
+```
+
+El fragmento hace una lista con solo los elementos impares de la lista `cuadrados`
+
+
+
+### Arreglos bidimensionales
+
+Supongamos también que un **símbolo predefinido** denominado `EMPTY` designa un campo vacío en el tablero de ajedrez.
+
+Entonces, si queremos crear una lista de listas que representan todo el tablero de ajedrez, se puede hacer de la siguiente manera:
+
+```python
+tablero  = []
+
+for i in range(8):
+    fila = [EMPTY for i in range(8)]
+    tablero.append(fila)
+```
+
+
+
+:notebook: Nota:
+
+- La parte interior del bucle crea una fila que consta de ocho elementos(cada uno de ellos es igual a `EMPTY`) y lo agrega a la lista del `tablero`.
+- La parte exterior se repite ocho veces.
+- En total, la lista `tablero` consta de 64 elementos (todos iguales a `EMPTY`).
+
+Este modelo imita perfectamente el tablero de ajedrez real, que en realidad es una lista de elementos de ocho elementos, todos ellos en filas individuales. Resumamos nuestras observaciones:
+
+- Los elementos de las filas son campos, ocho de ellos por fila.
+- Los elementos del tablero de ajedrez son filas, ocho de ellos por tablero de ajedrez.
+
+La variable `tablero` ahora es un **arreglo bidimensional**. También se le llama, por analogía a los términos algebraicos, una **matriz**.
+
+Como las listas de comprensión puede ser **anidadas**, podemos acortar la creación del tablero de la siguiente manera:
+
+```python
+tablero = [[EMPTY for i in range(8)] for j in range(8)]
+```
+
+La parte interna crea una fila, y la parte externa crea una lista de filas.
+
+
+
+### Acceso a arreglos bidimensionales
+
+El acceso al campo seleccionado del tablero requiere dos índices: el primero selecciona la fila; el segundo: el número del campo dentro de la fila, el cual es un número de columna.
+
+Echa un vistazo al tablero de ajedrez. Cada campo contiene un par de índices que se deben dar para acceder al contenido del campo:
+
+![matriz](assets/img36.png)
+
+Echando un vistazo a la figura que se muestra arriba, coloquemos algunas piezas de ajedrez en el tablero. Primero, agreguemos todas las torres:
+
+```python
+tablero[0][0] = TORRE
+tablero[0][7] = TORRE
+tablero[7][0] = TORRE
+tablero[7][7] = TORRE
+```
+
+Si deseas agregar un caballo a C4, hazlo de la siguiente manera:
+
+```python
+tablero[4][2] = CABALLO
+```
+
+Y ahora un peón a E5:
+
+```python
+tablero[3][4] = PEON
+```
+
+
+
+### Aplicaciones avanzadas
+
+
+
+Profundicemos en la naturaleza multidimensional de las listas. Para encontrar cualquier elemento de una lista bidimensional, debes usar dos *coordenadas*:
+
+- Una vertical (número de fila).
+- Una horizontal (número de columna).
+
+Imagina que desarrollas una pieza de software para una estación meteorológica automática. El dispositivo registra la temperatura del aire cada hora y lo hace durante todo el mes. Esto te da un total de 24 × 31 = 744 valores. Intentemos diseñar una lista capaz de almacenar todos estos resultados.
+
+Primero, debes decidir qué tipo de datos sería adecuado para esta aplicación. En este caso, sería mejor un `float`, ya que este termómetro puede medir la temperatura con una precisión de 0.1 ℃.
+
+Luego tomarás la decisión arbitraria de que las filas registrarán las lecturas cada hora exactamente (por lo que la fila tendrá 24 elementos) y cada una de las filas se asignará a un día del mes (supongamos que cada mes tiene 31 días, por lo que necesita 31 filas). Aquí está el par apropiado de comprensiones(`h` es para las horas, `d`para el día):
+
+```python
+temps = [[0.0 for h in range (24)] for d in range (31)]
+```
+
+Toda la matriz está llena de ceros ahora. Puede suponer que se actualiza automáticamente utilizando agentes de hardware especiales. Lo que tienes que hacer es esperar a que la matriz se llene con las mediciones.
+
+---
+
+Ahora es el momento de determinar la temperatura promedio mensual del mediodía. Suma las 31 lecturas registradas al mediodía y divida la suma por 31. Puedes suponer que la temperatura de medianoche se almacena primero. Aquí está el código:
+
+```python
+temps = [[0.0 for h in range(24)] for d in range (31)]
+#
+# la matriz se actualiza mágicamente aquí
+#
+
+suma = 0.0
+
+for day in temps:
+    suma += day[11]
+
+promedio= suma / 31
+
+print("Temperatura promedio al mediodía:", promedio)
+```
+
+:notebook: Nota: La variable `day` utilizada por el bucle `for` no es un escalar: cada paso a través de la matriz `temps` lo asigna a la siguiente fila de la matriz; Por lo tanto, es una lista. Se debe indexar con `11` para acceder al valor de temperatura medida al mediodía.
+
+---
+
+Ahora encuentra la temperatura más alta durante todo el mes, ve el código:
+
+```python
+temps = [[0.0 for h in range (24)] for d in range (31)]
+#
+# la matriz se actualiza mágicamente aquí
+#
+
+mas_alta = -100.0
+
+for day in temps:
+    for temp in day:
+        if temp > mas_alta:
+            mas_alta = temp
+
+print("La temperatura más alta fue:", mas_alta)
+```
+
+
+
+:notebook: Nota:
+
+- La variable `day` itera en todas las filas de la matriz `temps`.
+- La variable `temp` itera a través de todas las mediciones tomadas en un día.
+
+Ahora cuenta los días en que la temperatura al mediodía fue de al menos 20 ℃:
+
+```python
+temps = [[0.0 for h in range(24)] for d in range(31)]
+#
+# la matriz se actualiza mágicamente aquí
+#
+
+hotDays = 0
+
+for day in temps:
+    if day[11] > 20.0:
+        hotDays += 1
+
+print(hotDays, " fueron los días calurosos.")
+```
+
+
+
+### Arreglos tridimencionales
+
+Python no limita la profundidad de la inclusión lista en lista. Aquí puedes ver un ejemplo de un arreglo tridimensional:
+
+Imagina un hotel. Es un hotel enorme que consta de tres edificios, de 15 pisos cada uno. Hay 20 habitaciones en cada piso. Para esto, necesitas un arreglo que pueda recopilar y procesar información sobre las habitaciones ocupadas/libres.
+
+Primer paso: El tipo de elementos del arreglo. En este caso, sería un valor booleano (`True`/`False`).
+
+Paso dos: Análisis de la situación. Resume la información disponible: tres edificios, 15 pisos, 20 habitaciones.
+
+Ahora puedes crear el arreglo:
+
+```python
+habitaciones =[[[False for r in range(20)] for f in range(15)] for t in range(3)]
+```
+
+El primer índice (`0` a `2`) selecciona uno de los edificios; el segundo(`0` a `14`) selecciona el piso, el tercero (`0` a `19`) selecciona el número de habitación. Todas las habitaciones están inicialmente desocupadas.
+
+Ahora ya puedes reservar una habitación para dos recién casados: en el segundo edificio, en el décimo piso, habitación 14:
+
+```python
+habitaciones[1][9][13] = True 
+```
+
+y desocupa el segundo cuarto en el quinto piso ubicado en el primer edificio:
+
+```python
+habitaciones[0][4][1] = False 
+```
+
+Verifica si hay disponibilidad en el piso 15 del tercer edificio:
+
+```python
+vacante = 0
+
+for numeroHabitacion in range(20):
+    if not habitaciones[2][14][numeroHabitacion]:
+        vacante += 1
+```
+
+La variable `vacante` contiene `0` si todas las habitaciones están ocupadas, o en dado caso el número de habitaciones disponibles.
+
+
+
+### ⚜️ PUNTOS CLAVE ⚜️
+
+1.  **La comprensión de listas** te permite crear nuevas listas a partir de las existentes de una manera concisa y elegante. La sintaxis de una lista de comprensión es la siguiente:
+   
+   ```python
+   [expresión for elemento in lista if condicional]
+   ```
+   su equivalente es
+   ```python
+   for elemento in lista:
+       if condicional:
+           expresión
+   ```
+
+Este es un ejemplo de una lista de comprensión: el código siguiente crea una lista de cinco elementos con los primeros cinco números naturales elevados a la potencia de 3:
+
+```python
+cubos = [num ** 3 for num in range (5)]
+print(cubos) # salidas: [0, 1, 8, 27, 64]
+```
+
+
+
+2. Puedes usar **listas anidadas** en Python para crear **matrices** (es decir, listas bidimensionales). Por ejemplo:
+
+![array](assets/img37.png)
+
+```python
+# Una tabla de cuatro columnas y cuatro filas: un arreglo bidimensional (4x4)
+
+table = [[":(", ":)", ":(", ":)"],
+         [":)", ":(", ":)", ":)"],
+         [":(", ":)", ":)", ":("],
+         [":)", ":)", ":)", ":("]]
+
+print(tabla)
+print(tabla [0][0]) # salida: ':('
+print(tabla [0][3]) # salida: ':)'
+```
+
+
+
+3. Puedes anidar tantas listas en las listas como desee y, por lo tanto, crear listas n-dimensionales, por ejemplo, arreglos de tres, cuatro o incluso sesenta y cuatro dimensiones. Por ejemplo:
+
+![n-matriz](assets/img38.png)
+
+```python
+# Cubo - un arreglo tridimensional (3x3x3)
+
+cubo = [[[':(', 'x', 'x'],
+         [':)', 'x', 'x'],
+         [':(', 'x', 'x']],
+
+        [[':)', 'x', 'x'],
+         [':(', 'x', 'x'],
+         [':)', 'x', 'x']],
+
+        [[':(', 'x', 'x'],
+         [':)', 'x', 'x'],
+         [':)', 'x', 'x']]]
+
+print(cubo)
+print(cubo [0][0][0]) # salida: ':('
+print(cubo [2][2][0]) # salida: ':)'
+```
+
